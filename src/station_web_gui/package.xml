@@ -3,7 +3,7 @@
 <package format="3">
   <name>station_web_gui</name>
   <version>0.0.0</version>
-  <description>ROS2 package for a Flask web GUI showing temperature</description>
+  <description>ROS2 package for a Tornado web GUI showing temperature</description>
   <maintainer email="your_email@example.com">Your Name</maintainer>
   <license>TODO: License declaration</license>
 
@@ -11,7 +11,8 @@
 
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
-  <depend>flask</depend>
+  <depend>tornado</depend> <!-- Add the Tornado dependency -->
+  <depend>websockets</depend>  <!-- Add the websockets dependency -->
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

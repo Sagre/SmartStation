@@ -5,10 +5,25 @@
 </head>
 <body>
     <h1>Current Temperature:</h1>
-    {% if temperature is not none %}
-        <p>{{ temperature }} °C</p>
-    {% else %}
-        <p>No temperature data received yet.</p>
-    {% endif %}
+    <p id="temperature_value">Loading...</p>
+
+    <script type="text/javascript">
+        var ws = new WebSocket("ws://localhost:8888/ws"); // Adjust port if needed
+
+        ws.onopen = function() {
+            console.log("WebSocket connected");
+        };
+
+        ws.onmessage = function(evt) {
+            var data = JSON.parse(evt.data);
+            if (data.temperature !== undefined) {
+                document.getElementById("temperature_value").innerHTML = data.temperature.toFixed(2) + " °C";
+            }
+        };
+
+        ws.onclose = function() {
+            console.log("WebSocket disconnected");
+        };
+    </script>
 </body>
 </html>
