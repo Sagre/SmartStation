@@ -9,18 +9,17 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
+# Add Flask dependency.  This is handled through the package.xml dependencies and Python's setup.py (see below).
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# Create a Python executable
-ros_package_path(${PROJECT_NAME} python/station_web_gui.py)
-
+# Install Python scripts (The most common and modern approach)
 install(
   PROGRAMS
-    python/station_web_gui.py
+    src/station_web_gui.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
