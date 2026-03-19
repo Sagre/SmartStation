@@ -1,7 +1,51 @@
+/* style.css */
 body {
-    font-family: sans-serif;
-    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Centers the content */
+    justify-content: center; /* Horizontally centers content */
+    align-items: center; /* Vertically centers content */
+    min-height: 100vh; /* Ensures content takes up at least the screen height */
 }
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%; /* Adjust the width as needed */
+    max-width: 600px; /* Limits the max-width to prevent extreme stretching */
+}
+
 h1 {
+    text-align: center;
+    color: #333;
     margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#temperature_value, #humidity_value {
+    font-weight: bold;
+}
+
+/* Optional: Add some hover effects to the table rows */
+tbody tr:hover {
+    background-color: #f9f9f9;
 }

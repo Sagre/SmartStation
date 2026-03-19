@@ -68,8 +68,7 @@ class SensorDataWebSocket(BaseWebSocketHandler):
             data = json.loads(message)
             if "sensor_name" in data and "value" in data:
                 self.sensor_data[data["sensor_name"]] = data["value"]
-                # No need to send_update, the client will handle the logic,
-                #  as the old implementation.
+
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
         except Exception as e:

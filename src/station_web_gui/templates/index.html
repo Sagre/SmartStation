@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Temperature and Humidity</title>
+    <title>Sensor Dashboard</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Temperature: <span id="temperature_value">Loading...</span></h1>
-    <h1>Humidity: <span id="humidity_value">Loading...</span></h1>
+    <div class="container">
+        <h1>Sensor Data</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sensor</th>
+                    <th>Value</th>
+                    <th>Unit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Temperature</td>
+                    <td id="temperature_value">Loading...</td>
+                    <td>°C</td>
+                </tr>
+                <tr>
+                    <td>Humidity</td>
+                    <td id="humidity_value">Loading...</td>
+                    <td>%</td>
+                </tr>
+                <!-- Add more rows for other sensors -->
+            </tbody>
+        </table>
+    </div>
+
     <script type="text/javascript">
-        var ws = new WebSocket("/ws"); // Use the correct WebSocket path
+        var ws = new WebSocket("/ws");
 
         ws.onopen = function(event) {
             console.log("WebSocket opened");
@@ -17,9 +41,9 @@
         ws.onmessage = function(event) {
             var data = JSON.parse(event.data);
             if (data.sensor_name === "temperature") {
-                document.getElementById("temperature_value").innerText = data.value.toFixed(2) + " °C";
+                document.getElementById("temperature_value").innerText = data.value.toFixed(2);
             } else if (data.sensor_name === "humidity") {
-                document.getElementById("humidity_value").innerText = data.value.toFixed(2) + " %";
+                document.getElementById("humidity_value").innerText = data.value.toFixed(2);
             }
         };
 
