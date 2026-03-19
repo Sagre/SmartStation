@@ -206,7 +206,17 @@ def main(args=None):
 
 
     print("Server listening on port 8888", flush=True)  # Changed port
-
+    while True:
+        try:
+            # Keep the main thread alive to allow the server to run
+            tornado.ioloop.IOLoop.current().add_timeout(tornado.ioloop.timedelta(seconds=1), lambda: None)
+            tornado.ioloop.IOLoop.current().start()
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt received, shutting down", flush=True)
+            break
+        except Exception as e:
+            print(f"Error in main loop: {e}", flush=True)
+            traceback.print_exc()
     print("Shutting down", flush=True)
 
 if __name__ == "__main__":
