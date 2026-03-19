@@ -138,8 +138,8 @@ class ROS2Bridge(Node):
 def make_app(template_path, static_path):
     app = tornado.web.Application([
         (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
-        (r'/temperature_ws', TemperatureWebSocket), # Comment out
-        (r'/humidity_ws', HumidityWebSocket), # Comment out
+        (r'/temperature_ws', TemperatureWebSocket),
+        (r'/humidity_ws', HumidityWebSocket),
         (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
     ], template_path=template_path, debug=True)
     app.temperature_value = 25
