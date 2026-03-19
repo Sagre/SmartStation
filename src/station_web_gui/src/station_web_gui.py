@@ -166,7 +166,10 @@ class StationWebGUIApp:
             (r'/humidity_ws', HumidityWebSocket, dict(web_gui_application=self)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
-        
+        app.temperature_value = 25
+        app.humidity_value = 60
+        app.temperature_ws_handler = None
+        app.humidity_ws_handler = None
         return app
 
     def start_ros2_bridge(self):
