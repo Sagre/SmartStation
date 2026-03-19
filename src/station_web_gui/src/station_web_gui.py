@@ -200,8 +200,8 @@ class HomeHandler(tornado.web.RequestHandler):
             self.write(template.generate(temperature_value=self.application.temperature_value,
                                         humidity_value=self.application.humidity_value))
         except Exception as e:
-            print(f"Error in HomeHandler: {e}", flush=True)  # Add this
-            traceback.print_exc()  # And this
+            print(f"Error in HomeHandler: {e}", flush=True)
+            traceback.print_exc()
             self.set_status(500)
             self.write(f"Error loading template: {e}")
 
