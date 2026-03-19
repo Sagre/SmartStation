@@ -158,12 +158,13 @@ class StationWebGUIApp:
                 Logger.error(f"Error sending humidity to WebSocket: {e}")
 
     def make_app(self):
-        return tornado.web.Application([
+        app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path), app=self)),
-            (r'/temperature_ws', TemperatureWebSocket, dict(application=self)),
-            (r'/humidity_ws', HumidityWebSocket, dict(application=self)),
+            (r'/temperature_ws', TemperatureWebSocket, dict(application=app)),
+            (r'/humidity_ws', HumidityWebSocket, dict(application=app)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
+        return app
 
     def start_ros2_bridge(self):
         self.ros2_bridge = ROS2Bridge(self)
