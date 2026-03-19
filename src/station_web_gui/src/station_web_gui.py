@@ -157,7 +157,7 @@ class StationWebGUIApp:
 
     def make_app(self):
         return tornado.web.Application([
-            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
+            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path), app=self)),
             (r'/temperature_ws', TemperatureWebSocket, dict(application=self)),
             (r'/humidity_ws', HumidityWebSocket, dict(application=self)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
