@@ -136,6 +136,7 @@ class ROS2Bridge(Node):
                 self.get_logger().error(f"Error sending humidity to WebSocket: {e}")
 
 def make_app(template_path, static_path):
+    print(f"Creating Tornado application with template path: {template_path} and static path: {static_path}", flush=True)
     app = tornado.web.Application([
         (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
         (r'/temperature_ws', TemperatureWebSocket),
