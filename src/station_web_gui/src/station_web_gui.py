@@ -10,7 +10,7 @@ import json
 import os
 import threading
 import traceback
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 
 class Config:
     """Centralized configuration settings."""
@@ -18,13 +18,24 @@ class Config:
         self.port = 8888
         self.template_path = os.path.join(os.path.dirname(__file__), "templates")
         self.static_path = os.path.join(os.path.dirname(__file__), "static")
-        self.default_temperature = 25.0
-        self.default_humidity = 60.0
-        self.topic_config = {  # Example: configure topic names
-            "temperature": "temperature",
-            "humidity": "humidity",
-            # Add more sensors here
-        }
+        self.config_file = "sensor_config.json" # Path to the configuration file
+
+        self.sensor_config: List[Dict] = self.load_sensor_config() # Load sensor configuration
+
+    def load_sensor_config(self) -> List[Dict]:
+        """Loads sensor configuration from the JSON file."""
+        try:
+            with open(self.config_file, 'r') as f:
+                return json.load(f).get("sensors", []) # Added .get("sensors", []) to avoid errors if file is malformed.
+        except FileNotFoundError:
+            Logger.error(f"Configuration file not found: {self.config_file}")
+            return []
+        except json.JSONDecodeError:
+            Logger.error(f"Error decoding JSON in {self.config_file}")
+            return []
+        except Exception as e:
+            Logger.error(f"Error loading sensor config: {e}")
+            return []
 
 class Logger:
     """Standardized logging utility."""
@@ -68,7 +79,8 @@ class SensorDataWebSocket(BaseWebSocketHandler):
             data = json.loads(message)
             if "sensor_name" in data and "value" in data:
                 self.sensor_data[data["sensor_name"]] = data["value"]
-
+                # No need to send_update, the client will handle the logic,
+                #  as the old implementation.
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
         except Exception as e:
@@ -86,17 +98,20 @@ class ROS2Bridge(Node):
 
     def initialize_subscriptions(self):
         """Creates subscriptions based on the config."""
-        for sensor_name, topic_name in self.app.config.topic_config.items():
-            self.create_sensor_subscription(sensor_name, topic_name)
+        for sensor in self.app.config.sensor_config:
+            self.create_sensor_subscription(sensor)
 
-    def create_sensor_subscription(self, sensor_name: str, topic_name: str):
+    def create_sensor_subscription(self, sensor_config: Dict):
         """Creates a subscription for a specific sensor topic."""
-        def callback(msg: Float64, sensor_name=sensor_name):
+        sensor_id = sensor_config["id"]
+        topic_name = sensor_config["topic"]
+
+        def callback(msg: Float64, sensor_id=sensor_id):
             try:
-                Logger.debug(f"Received {sensor_name}: {msg.data}")
-                self.send_sensor_data(sensor_name, msg.data)
+                Logger.debug(f"Received {sensor_id}: {msg.data}")
+                self.send_sensor_data(sensor_id, msg.data)
             except Exception as e:
-                Logger.error(f"Error in {sensor_name} callback: {e}")
+                Logger.error(f"Error in {sensor_id} callback: {e}")
                 traceback.print_exc()
 
         subscription = self.create_subscription(
@@ -105,7 +120,7 @@ class ROS2Bridge(Node):
             callback,
             10
         )
-        self.topic_subscriptions[sensor_name] = subscription  # Keep track of subscriptions
+        self.topic_subscriptions[sensor_id] = subscription  # Keep track of subscriptions
 
     def send_sensor_data(self, sensor_name: str, value: float):
       """Sends sensor data to the WebSocket."""
@@ -121,8 +136,6 @@ class StationWebGUIApp:
     """Main application class managing the web GUI."""
     def __init__(self, config: Config):
         self.config = config
-        self.temperature_value = config.default_temperature
-        self.humidity_value = config.default_humidity
         self.sensor_ws_handler: Optional[SensorDataWebSocket] = None # single handler
         self.ros2_bridge: Optional[ROS2Bridge] = None
         self.ioloop = tornado.ioloop.IOLoop.current()
@@ -170,7 +183,8 @@ class HomeHandler(tornado.web.RequestHandler):
 
     async def get(self):
         try:
-            self.render("index.html")
+            # Pass the sensor configuration to the template
+            self.render("index.html", sensor_config=self.application.config.sensor_config)
         except Exception as e:
             print(f"Error in HomeHandler: {e}", flush=True)
             traceback.print_exc()

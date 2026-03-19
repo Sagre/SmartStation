@@ -16,17 +16,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Temperature</td>
-                    <td id="temperature_value">Loading...</td>
-                    <td>°C</td>
-                </tr>
-                <tr>
-                    <td>Humidity</td>
-                    <td id="humidity_value">Loading...</td>
-                    <td>%</td>
-                </tr>
-                <!-- Add more rows for other sensors -->
+                {% for sensor in sensor_config %}
+                    <tr>
+                        <td>{{ sensor.representation }}</td>
+                        <td id="{{ sensor.id }}_value">Loading...</td>
+                        <td>{{ sensor.unit }}</td>
+                    </tr>
+                {% end %}
             </tbody>
         </table>
     </div>
@@ -40,10 +36,11 @@
 
         ws.onmessage = function(event) {
             var data = JSON.parse(event.data);
-            if (data.sensor_name === "temperature") {
-                document.getElementById("temperature_value").innerText = data.value.toFixed(2);
-            } else if (data.sensor_name === "humidity") {
-                document.getElementById("humidity_value").innerText = data.value.toFixed(2);
+            if (data.sensor_name) {
+                var element = document.getElementById(data.sensor_name + "_value"); // Use sensor_name for the ID
+                if (element) {
+                    element.innerText = data.value.toFixed(2);
+                }
             }
         };
 
