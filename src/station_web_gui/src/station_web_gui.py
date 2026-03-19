@@ -17,7 +17,8 @@ class HomeHandler(tornado.web.RequestHandler):
         self.template_loader = template_loader
 
     async def get(self):
-        print("Get", flush=True)        await self.websocket_connect()
+        print("Get", flush=True)
+        await self.websocket_connect()
         try:
             template = self.template_loader.load("index.html")
             self.write(template.generate(temperature_value=self.application.temperature_value,
