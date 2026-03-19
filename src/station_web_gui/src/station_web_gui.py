@@ -9,29 +9,24 @@ import tornado.template
 import json
 import os
 import threading
-import traceback
-import time
+import traceback  # Import traceback
 
 class HomeHandler(tornado.web.RequestHandler):
     def initialize(self, template_loader):
         self.template_loader = template_loader
 
+
     async def get(self):
-        print("Get", flush=True)
-#        await self.websocket_connect()
+        print("Get")
         try:
             template = self.template_loader.load("index.html")
             self.write(template.generate(temperature_value=self.application.temperature_value,
                                         humidity_value=self.application.humidity_value))
         except Exception as e:
-            print(f"Error in HomeHandler: {e}", flush=True)
-            traceback.print_exc()
+            print(f"Error in HomeHandler: {e}", flush=True)  # Add this
+            traceback.print_exc()  # And this
             self.set_status(500)
             self.write(f"Error loading template: {e}")
-
-    async def websocket_connect(self):
-        # This method is now just a placeholder since connections are handled in get()
-        pass
 
 class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
     def initialize(self):
@@ -59,7 +54,6 @@ class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
         self.temperature = value
         self.last_update = tornado.ioloop.IOLoop.current().time()
         self.write_message(json.dumps({"temperature": self.temperature}))
-
 
 class HumidityWebSocket(tornado.websocket.WebSocketHandler):
     def initialize(self):
@@ -90,7 +84,7 @@ class HumidityWebSocket(tornado.websocket.WebSocketHandler):
 
 class ROS2Bridge(Node):
     def __init__(self, app):
-        super().__init__('ros2_web_bridge')
+        super().init('ros2_web_bridge')
         self.app = app # Reference to the Tornado application
         self.temperature_value = 25
         self.humidity_value = 60
@@ -107,6 +101,7 @@ class ROS2Bridge(Node):
             10
         )
         self.get_logger().info('ROS2 Bridge Node started')
+
 
     def temperature_callback(self, msg):
         try:
@@ -132,8 +127,6 @@ class ROS2Bridge(Node):
                 self.app.temperature_ws_handler.update_temperature(self.temperature_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending temperature to WebSocket: {e}")
-        else:
-            self.get_logger().info("No temperature WebSocket handler available to update")
 
     def update_humidity_web_sockets(self):
         if self.app.humidity_ws_handler:
@@ -141,15 +134,13 @@ class ROS2Bridge(Node):
                 self.app.humidity_ws_handler.update_humidity(self.humidity_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending humidity to WebSocket: {e}")
-        else:
-            self.get_logger().info("No humidity WebSocket handler available to update")
 
 def make_app(template_path, static_path):
     app = tornado.web.Application([
         (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
-        (r'/temperature_ws', TemperatureWebSocket),
-        (r'/humidity_ws', HumidityWebSocket),
-        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}),
+        (r'/temperature_ws', TemperatureWebSocket), # Comment out
+        (r'/humidity_ws', HumidityWebSocket), # Comment out
+        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
     ], template_path=template_path, debug=True)
     app.temperature_value = 25
     app.humidity_value = 60
@@ -159,6 +150,7 @@ def make_app(template_path, static_path):
 
 def main(args=None):
     rclpy.init(args=args)
+
 
     # Get the current file's directory
     file_dir = os.path.dirname(os.path.abspath(__file__))
