@@ -9,7 +9,6 @@ import tornado.template
 import json
 import os
 import threading
-import asyncio  # Import asyncio
 
 class HomeHandler(tornado.web.RequestHandler):
     def initialize(self, template_loader):
@@ -125,11 +124,11 @@ class ROS2Bridge(Node):
 
 def make_app(template_path, static_path):
     app = tornado.web.Application([
-        (r"/", HomeHandler),
-        (r"/temperature_ws", TemperatureWebSocket),
-        (r"/humidity_ws", HumidityWebSocket),
-        (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
-    ], template_path=template_path, debug=True)
+        (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
+        (r'/temperature_ws', TemperatureWebSocket),
+        (r'/humidity_ws', HumidityWebSocket),
+        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
+    ], debug=True)
     app.temperature_value = 25
     app.humidity_value = 60
     app.temperature_ws_handler = None
@@ -156,6 +155,7 @@ def main(args=None):
         ros2_bridge_node.destroy_node()
         rclpy.shutdown()
 
+
     # Get the IOLoop instance
     ioloop = tornado.ioloop.IOLoop.current()
 
@@ -175,8 +175,10 @@ def main(args=None):
     print("Server listening on port 8888")
     # Keep the main thread alive (for the web server)
     # ioloop.start() #The ioloop is already handled in the 'start_tornado' function
+    # rclpy.spin(TemperatureSubscriber)
+    # Remove the rclpy.spin and replace it with ioloop.add_callback
     ioloop.add_callback(lambda: print("Tornado Ready!"))
-    rclpy.spin(TemperatureSubscriber)
+    # ioloop.start() #The IOLoop is already started
 
     print("Shutting down")
     ioloop.stop() #Shut down the IOLoop
