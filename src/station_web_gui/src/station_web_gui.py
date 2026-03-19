@@ -201,7 +201,7 @@ class StationWebGUIApp:
         ros2_thread.start()
 
         try:
-            self.ioloop.start()
+            app.ioloop.start()
         except Exception as e:
             Logger.error(f"Tornado IOLoop encountered an error: {e}")
             traceback.print_exc()
