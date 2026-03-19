@@ -160,7 +160,6 @@ def main(args=None):
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
-        return
         print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
