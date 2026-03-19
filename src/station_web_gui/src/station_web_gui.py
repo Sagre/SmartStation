@@ -93,6 +93,7 @@ class ROS2Bridge(Node):
         self.humidity_subscription = self.create_subscription(
             Float64,
             'humidity',
+            self.humidity_callback,
             10
         )
         Logger.info('ROS2 Bridge Node started')
