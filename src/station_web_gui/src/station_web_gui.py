@@ -148,6 +148,7 @@ def main(args=None):
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
+        print("Starting ROS2 Bridge Thread") # <----- ADDED
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
         rclpy.spin(ros2_bridge_node)
@@ -164,6 +165,7 @@ def main(args=None):
     ros2_thread.start()
 
     def start_tornado():
+        print("Starting Tornado Thread") # <----- ADDED
         port = 8888  # Or any port you want
         app.listen(port)
         ioloop.start()
