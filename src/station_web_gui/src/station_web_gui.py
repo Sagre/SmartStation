@@ -44,14 +44,6 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
         self.application = application
         self.last_update = 0
 
-    def open(self):
-        Logger.info(f"{self.__class__.__name__} WebSocket opened")
-        self.application.register_websocket_handler(self)
-
-    def on_close(self):
-        Logger.info(f"{self.__class__.__name__} WebSocket closed")
-        self.application.unregister_websocket_handler(self)
-
 class TemperatureWebSocket(BaseWebSocketHandler):
     """Handles temperature WebSocket connections."""
     def on_message(self, message):
@@ -65,6 +57,19 @@ class TemperatureWebSocket(BaseWebSocketHandler):
     def send_update(self, temperature: float):
         self.write_message(json.dumps({"temperature": temperature}))
 
+    def open(self):
+        print("Temperature WebSocket opened", flush=True)
+        # Store reference to this handler in the app
+        self.application.temperature_ws_handler = self
+
+    def on_close(self):
+        print("Temperature WebSocket closed", flush=True)
+        # Clear reference when closed
+        if self.application.temperature_ws_handler == self:
+            self.application.temperature_ws_handler = None
+
+
+
 class HumidityWebSocket(BaseWebSocketHandler):
     """Handles humidity WebSocket connections."""
     def on_message(self, message):
@@ -77,6 +82,17 @@ class HumidityWebSocket(BaseWebSocketHandler):
 
     def send_update(self, humidity: float):
         self.write_message(json.dumps({"humidity": humidity}))
+
+    def open(self):
+        print("Humidity WebSocket opened", flush=True)
+        # Store reference to this handler in the app
+        self.application.humidity_ws_handler = self
+
+    def on_close(self):
+        print("Humidity WebSocket closed", flush=True)
+        # Clear reference when closed
+        if self.application.humidity_ws_handler == self:
+            self.application.humidity_ws_handler = None
 
 class ROS2Bridge(Node):
     """ROS2 node for handling sensor data."""
@@ -159,9 +175,9 @@ class StationWebGUIApp:
 
     def make_app(self):
         app = tornado.web.Application([
-            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path), app=self)),
-            (r'/temperature_ws', TemperatureWebSocket, dict(application=app)),
-            (r'/humidity_ws', HumidityWebSocket, dict(application=app)),
+            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
+            (r'/temperature_ws', TemperatureWebSocket),
+            (r'/humidity_ws', HumidityWebSocket),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
         return app
@@ -187,9 +203,8 @@ class StationWebGUIApp:
             traceback.print_exc()
 
 class HomeHandler(tornado.web.RequestHandler):
-    def initialize(self, template_loader, app):
+    def initialize(self, template_loader):
         self.template_loader = template_loader
-        self.app = app
 
     async def get(self):
         try:
