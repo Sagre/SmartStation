@@ -16,6 +16,7 @@ class HomeHandler(tornado.web.RequestHandler):
         self.template_loader = template_loader
 
     async def get(self):
+        print("Get")
         try:
             template = self.template_loader.load("index.html")
             self.write(template.generate(temperature_value=self.application.temperature_value,
@@ -159,6 +160,7 @@ def main(args=None):
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
+        return
         print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
@@ -182,7 +184,7 @@ def main(args=None):
 
     def start_tornado():
         print("Starting Tornado Thread - Inside Start", flush=True)
-        port = 8888  # Or any port you want
+        port = 5000  # Or any port you want
         app.listen(port)
         print("Tornado Listening - Inside Start", flush=True)
         try: #Wrap the call
@@ -194,10 +196,11 @@ def main(args=None):
             print(f"Tornado IOLoop encountered an error: {e}", flush=True) # Print exception
             traceback.print_exc() # Print the full traceback
 
-    tornado_thread = threading.Thread(target=start_tornado, daemon=False)
-    print("Tornado Thread Created - Main", flush=True)
-    tornado_thread.start()
-    print("Tornado Thread Started - Main", flush=True)
+    start_tornado()
+    #tornado_thread = threading.Thread(target=start_tornado, daemon=False)
+    #print("Tornado Thread Created - Main", flush=True)
+    #tornado_thread.start()
+    #print("Tornado Thread Started - Main", flush=True)
 
     print("Server listening on port 8888", flush=True)
     # Keep the main thread alive (for the web server)

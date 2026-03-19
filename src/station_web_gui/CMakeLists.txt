@@ -26,14 +26,14 @@ install(
     DIRECTORY
       static/
     DESTINATION
-      share/${PROJECT_NAME}/static
+      lib/${PROJECT_NAME}/static
 )
 
 install(
     DIRECTORY
       templates/
     DESTINATION
-      share/${PROJECT_NAME}/templates
+      lib/${PROJECT_NAME}/templates
 )
 
 install(
