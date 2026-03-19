@@ -126,6 +126,8 @@ class ROS2Bridge(Node):
                 self.app.temperature_ws_handler.update_temperature(self.temperature_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending temperature to WebSocket: {e}")
+        else:
+            self.get_logger().info("No temperature WebSocket handler available to update")
 
     def update_humidity_web_sockets(self):
         if self.app.humidity_ws_handler:
@@ -133,6 +135,8 @@ class ROS2Bridge(Node):
                 self.app.humidity_ws_handler.update_humidity(self.humidity_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending humidity to WebSocket: {e}")
+        else:
+            self.get_logger().info("No humidity WebSocket handler available to update")
 
 def make_app(template_path, static_path):
     app = tornado.web.Application([
