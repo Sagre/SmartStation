@@ -170,13 +170,17 @@ def main(args=None):
     print("ROS2 Thread Started - Main")  # <----- ADDED
 
     def start_tornado():
-        print("Starting Tornado Thread - Inside Start")  # <----- ADDED
+        print("Starting Tornado Thread - Inside Start")
         port = 8888  # Or any port you want
         app.listen(port)
-        print("Tornado Listening - Inside Start")  # <----- ADDED
-        ioloop.start() # Keeps main thread alive.
-        print(f"Tornado server started on port {port}")
-        print("Tornado IOLoop Started - Inside Start")  # <----- ADDED
+        print("Tornado Listening - Inside Start")
+        try: #Wrap the call
+            ioloop.start()
+            print(f"Tornado server started on port {port}")
+            print("Tornado IOLoop Started - Inside Start")
+        except Exception as e:
+            print(f"Tornado IOLoop encountered an error: {e}") # Print exception
+            e.print_exc() # Print the full traceback
 
     tornado_thread = threading.Thread(target=start_tornado, daemon=False) # Removed Daemon
     print("Tornado Thread Created - Main")  # <----- ADDED
