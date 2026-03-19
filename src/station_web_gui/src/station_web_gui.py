@@ -150,7 +150,8 @@ class StationWebGUIApp:
 
     def make_app(self):
         app = tornado.web.Application([
-            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
+            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path),
+                                       web_gui_app=self)), # Pass the web_gui_app instance
             (r'/ws', SensorDataWebSocket, dict(web_gui_application=self)), # Changed to a single websocket
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
@@ -178,13 +179,14 @@ class StationWebGUIApp:
             traceback.print_exc()
 
 class HomeHandler(tornado.web.RequestHandler):
-    def initialize(self, template_loader):
+    def initialize(self, template_loader, web_gui_app): # Receive web_gui_app
         self.template_loader = template_loader
+        self.web_gui_app = web_gui_app # Store the web_gui_app instance
 
     async def get(self):
         try:
             # Pass the sensor configuration to the template
-            self.render("index.html", sensor_config=self.application.config.sensor_config)
+            self.render("index.html", sensor_config=self.web_gui_app.config.sensor_config) # Access via web_gui_app
         except Exception as e:
             print(f"Error in HomeHandler: {e}", flush=True)
             traceback.print_exc()
