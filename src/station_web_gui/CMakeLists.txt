@@ -44,7 +44,7 @@ install(
 
 install(
   PROGRAMS
-    src/sensor_config.cfg
+    src/sensor_config.json
   DESTINATION lib/${PROJECT_NAME}
 )
 
