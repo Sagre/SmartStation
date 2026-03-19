@@ -38,6 +38,7 @@ class Logger:
 class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
     """Base class for WebSocket handlers with shared functionality."""
     def __init__(self, *args, **kwargs):
+        Logger.info(f"{self.__class__.__name__} Kwargs: {kwargs}")
         super().__init__(*args, **kwargs)
         self.application = kwargs.get('application')
         self.last_update = 0
@@ -158,8 +159,8 @@ class StationWebGUIApp:
     def make_app(self):
         return tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path), app=self)),
-            (r'/temperature_ws', TemperatureWebSocket, self),
-            (r'/humidity_ws', HumidityWebSocket, self),
+            (r'/temperature_ws', TemperatureWebSocket, dict(application=self)),
+            (r'/humidity_ws', HumidityWebSocket, dict(application=self)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
 
