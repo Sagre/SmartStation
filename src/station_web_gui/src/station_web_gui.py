@@ -10,7 +10,7 @@ import json
 import os
 import threading
 import traceback
-from typing import Optional
+from typing import Optional, Dict
 
 class Config:
     """Centralized configuration settings."""
@@ -20,6 +20,11 @@ class Config:
         self.static_path = os.path.join(os.path.dirname(__file__), "static")
         self.default_temperature = 25.0
         self.default_humidity = 60.0
+        self.topic_config = {  # Example: configure topic names
+            "temperature": "temperature",
+            "humidity": "humidity",
+            # Add more sensors here
+        }
 
 class Logger:
     """Standardized logging utility."""
@@ -52,32 +57,23 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
         Logger.info(f"{self.__class__.__name__} WebSocket closed")
         self.web_gui_application.unregister_websocket_handler(self)
 
-class TemperatureWebSocket(BaseWebSocketHandler):
-    """Handles temperature WebSocket connections."""
+class SensorDataWebSocket(BaseWebSocketHandler):
+    """Generic WebSocket handler for sensor data."""
+    def open(self):
+        super().open()
+        self.sensor_data: Dict[str, float] = {}  # Store the latest sensor data, {sensor_name: value}
+
     def on_message(self, message):
         try:
             data = json.loads(message)
-            if "temperature" in data:
-                self.send_update(data["temperature"])
+            if "sensor_name" in data and "value" in data:
+                self.sensor_data[data["sensor_name"]] = data["value"]
+                # No need to send_update, the client will handle the logic,
+                #  as the old implementation.
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
-
-    def send_update(self, temperature: float):
-        self.write_message(json.dumps({"temperature": temperature}))
-
-
-class HumidityWebSocket(BaseWebSocketHandler):
-    """Handles humidity WebSocket connections."""
-    def on_message(self, message):
-        try:
-            data = json.loads(message)
-            if "humidity" in data:
-                self.send_update(data["humidity"])
-        except json.JSONDecodeError:
-            Logger.error("Invalid JSON received")
-
-    def send_update(self, humidity: float):
-        self.write_message(json.dumps({"humidity": humidity}))
+        except Exception as e:
+            Logger.error(f"Error processing message: {e}")
 
 
 class ROS2Bridge(Node):
@@ -85,40 +81,42 @@ class ROS2Bridge(Node):
     def __init__(self, app):
         super().__init__('ros2_web_bridge')
         self.app = app
-        self.temperature_value = app.config.default_temperature
-        self.humidity_value = app.config.default_humidity
-
-        self.temperature_subscription = self.create_subscription(
-            Float64,
-            'temperature',
-            self.temperature_callback,
-            10
-        )
-        self.humidity_subscription = self.create_subscription(
-            Float64,
-            'humidity',
-            self.humidity_callback,
-            10
-        )
+        self.topic_subscriptions = {}
+        self.initialize_subscriptions()
         Logger.info('ROS2 Bridge Node started')
 
-    def temperature_callback(self, msg: Float64):
-        try:
-            self.temperature_value = msg.data
-            Logger.debug(f"Received temperature: {self.temperature_value}")
-            self.app.update_temperature(self.temperature_value)
-        except Exception as e:
-            Logger.error(f"Error in temperature_callback: {e}")
-            traceback.print_exc()
+    def initialize_subscriptions(self):
+        """Creates subscriptions based on the config."""
+        for sensor_name, topic_name in self.app.config.topic_config.items():
+            self.create_sensor_subscription(sensor_name, topic_name)
 
-    def humidity_callback(self, msg: Float64):
-        try:
-            self.humidity_value = msg.data
-            Logger.debug(f"Received humidity: {self.humidity_value}")
-            self.app.update_humidity(self.humidity_value)
-        except Exception as e:
-            Logger.error(f"Error in humidity_callback: {e}")
-            traceback.print_exc()
+    def create_sensor_subscription(self, sensor_name: str, topic_name: str):
+        """Creates a subscription for a specific sensor topic."""
+        def callback(msg: Float64, sensor_name=sensor_name):
+            try:
+                Logger.debug(f"Received {sensor_name}: {msg.data}")
+                self.send_sensor_data(sensor_name, msg.data)
+            except Exception as e:
+                Logger.error(f"Error in {sensor_name} callback: {e}")
+                traceback.print_exc()
+
+        subscription = self.create_subscription(
+            Float64,
+            topic_name,
+            callback,
+            10
+        )
+        self.topic_subscriptions[sensor_name] = subscription  # Keep track of subscriptions
+
+    def send_sensor_data(self, sensor_name: str, value: float):
+      """Sends sensor data to the WebSocket."""
+      message = {"sensor_name": sensor_name, "value": value}
+      try:
+          if self.app.sensor_ws_handler:
+              # Instead of updating data here, just send the message to the WS
+              self.app.ioloop.add_callback(self.app.sensor_ws_handler.write_message, json.dumps(message))
+      except Exception as e:
+          Logger.error(f"Error sending data to sensor WebSocket: {e}")
 
 class StationWebGUIApp:
     """Main application class managing the web GUI."""
@@ -126,48 +124,25 @@ class StationWebGUIApp:
         self.config = config
         self.temperature_value = config.default_temperature
         self.humidity_value = config.default_humidity
-        self.temperature_ws_handler: Optional[TemperatureWebSocket] = None
-        self.humidity_ws_handler: Optional[HumidityWebSocket] = None
+        self.sensor_ws_handler: Optional[SensorDataWebSocket] = None # single handler
         self.ros2_bridge: Optional[ROS2Bridge] = None
         self.ioloop = tornado.ioloop.IOLoop.current()
 
     def register_websocket_handler(self, handler: BaseWebSocketHandler):
-        if isinstance(handler, TemperatureWebSocket):
-            self.temperature_ws_handler = handler
-        elif isinstance(handler, HumidityWebSocket):
-            self.humidity_ws_handler = handler
+        if isinstance(handler, SensorDataWebSocket):
+            self.sensor_ws_handler = handler
 
     def unregister_websocket_handler(self, handler: BaseWebSocketHandler):
-        if isinstance(handler, TemperatureWebSocket) and self.temperature_ws_handler == handler:
-            self.temperature_ws_handler = None
-        elif isinstance(handler, HumidityWebSocket) and self.humidity_ws_handler == handler:
-            self.humidity_ws_handler = None
+        if isinstance(handler, SensorDataWebSocket) and self.sensor_ws_handler == handler:
+            self.sensor_ws_handler = None
 
-    def update_temperature(self, temperature: float):
-        self.temperature_value = temperature
-        if self.temperature_ws_handler:
-            try:
-                self.ioloop.add_callback(self.temperature_ws_handler.send_update, temperature)
-            except Exception as e:
-                Logger.error(f"Error sending temperature to WebSocket: {e}")
-    def update_humidity(self, humidity: float):
-        self.humidity_value = humidity
-        if self.humidity_ws_handler:
-            try:
-                self.ioloop.add_callback(self.humidity_ws_handler.send_update, humidity)
-            except Exception as e:
-                Logger.error(f"Error sending humidity to WebSocket: {e}")
     def make_app(self):
         app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
-            (r'/temperature_ws', TemperatureWebSocket, dict(web_gui_application=self)),
-            (r'/humidity_ws', HumidityWebSocket, dict(web_gui_application=self)),
+            (r'/ws', SensorDataWebSocket, dict(web_gui_application=self)), # Changed to a single websocket
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
-        app.temperature_value = 25
-        app.humidity_value = 60
-        app.temperature_ws_handler = None
-        app.humidity_ws_handler = None
+        app.sensor_ws_handler = None
         return app
 
     def start_ros2_bridge(self):
@@ -196,9 +171,7 @@ class HomeHandler(tornado.web.RequestHandler):
 
     async def get(self):
         try:
-            template = self.template_loader.load("index.html")
-            self.write(template.generate(temperature_value=self.application.temperature_value,
-                                        humidity_value=self.application.humidity_value))
+            self.render("index.html")
         except Exception as e:
             print(f"Error in HomeHandler: {e}", flush=True)
             traceback.print_exc()
@@ -213,4 +186,5 @@ def main(args=None):
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     main()
