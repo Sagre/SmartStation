@@ -136,7 +136,7 @@ def make_app(template_path, static_path):
     return app
 
 def main(args=None):
-    rclpy.init(args=args)
+    rclpy.init(args=args)  # Initialize ROS2 here (in the main thread)
 
     # Get the current file's directory
     file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -148,13 +148,16 @@ def main(args=None):
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
-        print("Starting ROS2 Bridge Thread") # <----- ADDED
+        print("Starting ROS2 Bridge Thread - Inside Start")  # <----- ADDED
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
+        print("ROS2 Bridge Node Created - Inside Start")  # <----- ADDED
         rclpy.spin(ros2_bridge_node)
+        print("ROS2 Spin Finished - Inside Start")  # <----- ADDED
         # Clean up
         ros2_bridge_node.destroy_node()
-        rclpy.shutdown()
+        rclpy.shutdown() # Move shutdown here
+        print("ROS2 Shutdown Completed - Inside Start")  # <----- ADDED
 
 
     # Get the IOLoop instance
@@ -162,29 +165,36 @@ def main(args=None):
 
     # Create a new thread for ROS2
     ros2_thread = threading.Thread(target=start_ros2_bridge, daemon=True)
+    print("ROS2 Thread Created - Main")  # <----- ADDED
     ros2_thread.start()
+    print("ROS2 Thread Started - Main")  # <----- ADDED
 
     def start_tornado():
-        print("Starting Tornado Thread") # <----- ADDED
+        print("Starting Tornado Thread - Inside Start")  # <----- ADDED
         port = 8888  # Or any port you want
         app.listen(port)
-        ioloop.start()
+        print("Tornado Listening - Inside Start")  # <----- ADDED
+        ioloop.start() # Keeps main thread alive.
         print(f"Tornado server started on port {port}")
+        print("Tornado IOLoop Started - Inside Start")  # <----- ADDED
 
-    tornado_thread = threading.Thread(target=start_tornado, daemon=True)
+    tornado_thread = threading.Thread(target=start_tornado, daemon=False) # Removed Daemon
+    print("Tornado Thread Created - Main")  # <----- ADDED
     tornado_thread.start()
+    print("Tornado Thread Started - Main")  # <----- ADDED
 
     print("Server listening on port 8888")
     # Keep the main thread alive (for the web server)
     # ioloop.start() #The ioloop is already handled in the 'start_tornado' function
     # rclpy.spin(TemperatureSubscriber)
     # Remove the rclpy.spin and replace it with ioloop.add_callback
-    ioloop.add_callback(lambda: print("Tornado Ready!"))
+    # ioloop.add_callback(lambda: print("Tornado Ready!"))
     # ioloop.start() #The IOLoop is already started
 
     print("Shutting down")
-    ioloop.stop() #Shut down the IOLoop
-    rclpy.shutdown()
+    # ioloop.stop() #Shut down the IOLoop - Removed
+    # rclpy.shutdown() - Removed
+    # The rclpy.shutdown is handled in the ROS2 thread.
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
