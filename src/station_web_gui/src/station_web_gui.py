@@ -32,6 +32,7 @@ class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
     def initialize(self):
         self.temperature = 25
         self.last_update = 0
+        print("TemperatureWebSocket initialized", flush=True) # Add this
 
     def open(self):
         print("Temperature WebSocket opened", flush=True)
@@ -44,21 +45,11 @@ class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
         if self.application.temperature_ws_handler == self:
             self.application.temperature_ws_handler = None
 
-    def on_message(self, message):
-        pass
-
-    async def get_latest_value(self):
-        return self.temperature
-
-    async def update_temperature(self, value):
-        self.temperature = value
-        self.last_update = tornado.ioloop.IOLoop.current().time()
-        self.write_message(json.dumps({"temperature": self.temperature}))
-
 class HumidityWebSocket(tornado.websocket.WebSocketHandler):
     def initialize(self):
         self.humidity = 60
         self.last_update = 0
+        print("HumidityWebSocket initialized", flush=True)  # Add this
 
     def open(self):
         print("Humidity WebSocket opened", flush=True)
@@ -70,17 +61,6 @@ class HumidityWebSocket(tornado.websocket.WebSocketHandler):
         # Clear reference when closed
         if self.application.humidity_ws_handler == self:
             self.application.humidity_ws_handler = None
-
-    def on_message(self, message):
-        pass
-
-    async def get_latest_value(self):
-        return self.humidity
-
-    async def update_humidity(self, value):
-        self.humidity = value
-        self.last_update = tornado.ioloop.IOLoop.current().time()
-        self.write_message(json.dumps({"humidity": self.humidity}))
 
 class ROS2Bridge(Node):
     def __init__(self, app):
