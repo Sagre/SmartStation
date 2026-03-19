@@ -18,9 +18,9 @@
             <tbody>
                 {% for sensor in sensor_config %}
                     <tr>
-                        <td>{{ sensor.representation }}</td>
-                        <td id="{{ sensor.id }}_value">Loading...</td>
-                        <td>{{ sensor.unit }}</td>
+                        <td>{{ sensor["representation"] }}</td>  <!-- Corrected line -->
+                        <td id="{{ sensor["id"] }}_value">Loading...</td> <!-- Corrected line -->
+                        <td>{{ sensor["unit"] }}</td>  <!-- Corrected line -->
                     </tr>
                 {% end %}
             </tbody>
