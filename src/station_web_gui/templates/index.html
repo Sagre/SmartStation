@@ -8,37 +8,27 @@
     <h1>Temperature: <span id="temperature_value">Loading...</span></h1>
     <h1>Humidity: <span id="humidity_value">Loading...</span></h1>
     <script type="text/javascript">
-        var temperatureSocket = new WebSocket("/temperature_ws");
-        var humiditySocket = new WebSocket("/humidity_ws");
+        var ws = new WebSocket("/ws"); // Use the correct WebSocket path
 
-        temperatureSocket.onopen = function(event) {
-            console.log("Temperature WebSocket opened");
+        ws.onopen = function(event) {
+            console.log("WebSocket opened");
         };
 
-        temperatureSocket.onmessage = function(event) {
+        ws.onmessage = function(event) {
             var data = JSON.parse(event.data);
-            if (data.temperature !== undefined) {
-                document.getElementById("temperature_value").innerText = data.temperature.toFixed(2) + " °C";
+            if (data.sensor_name === "temperature") {
+                document.getElementById("temperature_value").innerText = data.value.toFixed(2) + " °C";
+            } else if (data.sensor_name === "humidity") {
+                document.getElementById("humidity_value").innerText = data.value.toFixed(2) + " %";
             }
         };
 
-        temperatureSocket.onclose = function(event) {
-            console.log("Temperature WebSocket closed");
+        ws.onclose = function(event) {
+            console.log("WebSocket closed");
         };
 
-        humiditySocket.onopen = function(event) {
-            console.log("Humidity WebSocket opened");
-        };
-
-        humiditySocket.onmessage = function(event) {
-            var data = JSON.parse(event.data);
-            if (data.humidity !== undefined) {
-                document.getElementById("humidity_value").innerText = data.humidity.toFixed(2) + " %";
-            }
-        };
-
-        humiditySocket.onclose = function(event) {
-            console.log("Humidity WebSocket closed");
+        ws.onerror = function(error) {
+            console.error("WebSocket error:", error);
         };
     </script>
 </body>
