@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Temperature Display</title>
+    <title>Temperature and Humidity</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Current Temperature:</h1>
-    <p id="temperature_value">Loading...</p>
-
+    <h1>Temperature: <span id="temperature_value">Loading...</span></h1>
+    <h1>Humidity: <span id="humidity_value">Loading...</span></h1>
     <script type="text/javascript">
-        var ws = new WebSocket("ws://localhost:8888/ws"); // Adjust port if needed
+        var temperatureSocket = new WebSocket("ws://localhost:8888/temperature_ws");
+        var humiditySocket = new WebSocket("ws://localhost:8888/humidity_ws");
 
-        ws.onopen = function() {
-            console.log("WebSocket connected");
+        temperatureSocket.onopen = function(event) {
+            console.log("Temperature WebSocket opened");
         };
 
-        ws.onmessage = function(evt) {
-            var data = JSON.parse(evt.data);
+        temperatureSocket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
             if (data.temperature !== undefined) {
-                document.getElementById("temperature_value").innerHTML = data.temperature.toFixed(2) + " °C";
+                document.getElementById("temperature_value").innerText = data.temperature.toFixed(2) + " °C";
             }
         };
 
-        ws.onclose = function() {
-            console.log("WebSocket disconnected");
+        temperatureSocket.onclose = function(event) {
+            console.log("Temperature WebSocket closed");
+        };
+
+        humiditySocket.onopen = function(event) {
+            console.log("Humidity WebSocket opened");
+        };
+
+        humiditySocket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            if (data.humidity !== undefined) {
+                document.getElementById("humidity_value").innerText = data.humidity.toFixed(2) + " %";
+            }
+        };
+
+        humiditySocket.onclose = function(event) {
+            console.log("Humidity WebSocket closed");
         };
     </script>
 </body>

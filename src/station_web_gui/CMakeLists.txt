@@ -22,4 +22,24 @@ install(
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(
+    DIRECTORY
+      src/static/
+    DESTINATION
+      share/${PROJECT_NAME}/static
+)
+
+install(
+    DIRECTORY
+      src/templates/
+    DESTINATION
+      share/${PROJECT_NAME}/templates
+)
+
+install(
+  PROGRAMS
+    src/sensor_publisher.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
