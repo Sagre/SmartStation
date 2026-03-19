@@ -45,7 +45,7 @@ class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
         if self.application.temperature_ws_handler == self:
             self.application.temperature_ws_handler = None
     
-    async def update_temperature(self, value):
+    def update_temperature(self, value):
         self.temperature = value
         self.last_update = tornado.ioloop.IOLoop.current().time()
         self.write_message(json.dumps({"temperature": self.temperature}))
@@ -67,7 +67,7 @@ class HumidityWebSocket(tornado.websocket.WebSocketHandler):
         if self.application.humidity_ws_handler == self:
             self.application.humidity_ws_handler = None
 
-    async def update_humidity(self, value):
+    def update_humidity(self, value):
         self.humidity = value
         self.last_update = tornado.ioloop.IOLoop.current().time()
         self.write_message(json.dumps({"humidity": self.humidity}))
