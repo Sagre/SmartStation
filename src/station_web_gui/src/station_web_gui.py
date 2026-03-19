@@ -9,6 +9,7 @@ import tornado.template
 import json
 import os
 import threading
+import traceback  # Import traceback
 
 class HomeHandler(tornado.web.RequestHandler):
     def initialize(self, template_loader):
@@ -20,6 +21,8 @@ class HomeHandler(tornado.web.RequestHandler):
             self.write(template.generate(temperature_value=self.application.temperature_value,
                                         humidity_value=self.application.humidity_value))
         except Exception as e:
+            print(f"Error in HomeHandler: {e}", flush=True)  # Add this
+            traceback.print_exc()  # And this
             self.set_status(500)
             self.write(f"Error loading template: {e}")
 
@@ -29,12 +32,12 @@ class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
         self.last_update = 0
 
     def open(self):
-        print("Temperature WebSocket opened")
+        print("Temperature WebSocket opened", flush=True)
         # Store reference to this handler in the app
         self.application.temperature_ws_handler = self
 
     def on_close(self):
-        print("Temperature WebSocket closed")
+        print("Temperature WebSocket closed", flush=True)
         # Clear reference when closed
         if self.application.temperature_ws_handler == self:
             self.application.temperature_ws_handler = None
@@ -57,12 +60,12 @@ class HumidityWebSocket(tornado.websocket.WebSocketHandler):
         self.last_update = 0
 
     def open(self):
-        print("Humidity WebSocket opened")
+        print("Humidity WebSocket opened", flush=True)
         # Store reference to this handler in the app
         self.application.humidity_ws_handler = self
 
     def on_close(self):
-        print("Humidity WebSocket closed")
+        print("Humidity WebSocket closed", flush=True)
         # Clear reference when closed
         if self.application.humidity_ws_handler == self:
             self.application.humidity_ws_handler = None
@@ -99,14 +102,22 @@ class ROS2Bridge(Node):
         self.get_logger().info('ROS2 Bridge Node started')
 
     def temperature_callback(self, msg):
-        self.temperature_value = msg.data
-        self.get_logger().info(f"Received temperature: {self.temperature_value}")
-        self.update_temperature_web_sockets()
+        try:
+            self.temperature_value = msg.data
+            self.get_logger().info(f"Received temperature: {self.temperature_value}")
+            self.update_temperature_web_sockets()
+        except Exception as e:
+            self.get_logger().error(f"Error in temperature_callback: {e}")
+            traceback.print_exc()
 
     def humidity_callback(self, msg):
-        self.humidity_value = msg.data
-        self.get_logger().info(f"Received humidity: {self.humidity_value}")
-        self.update_humidity_web_sockets()
+        try:
+            self.humidity_value = msg.data
+            self.get_logger().info(f"Received humidity: {self.humidity_value}")
+            self.update_humidity_web_sockets()
+        except Exception as e:
+            self.get_logger().error(f"Error in humidity_callback: {e}")
+            traceback.print_exc()
 
     def update_temperature_web_sockets(self):
         if self.app.temperature_ws_handler:
@@ -125,10 +136,10 @@ class ROS2Bridge(Node):
 def make_app(template_path, static_path):
     app = tornado.web.Application([
         (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
-        (r'/temperature_ws', TemperatureWebSocket),
-        (r'/humidity_ws', HumidityWebSocket),
+        (r'/temperature_ws', TemperatureWebSocket), # Comment out
+        (r'/humidity_ws', HumidityWebSocket), # Comment out
         (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
-    ], debug=True)
+    ], template_path=template_path, debug=True)
     app.temperature_value = 25
     app.humidity_value = 60
     app.temperature_ws_handler = None
@@ -136,7 +147,7 @@ def make_app(template_path, static_path):
     return app
 
 def main(args=None):
-    rclpy.init(args=args)  # Initialize ROS2 here (in the main thread)
+    rclpy.init(args=args)
 
     # Get the current file's directory
     file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -148,16 +159,16 @@ def main(args=None):
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
-        print("Starting ROS2 Bridge Thread - Inside Start")  # <----- ADDED
+        print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
-        print("ROS2 Bridge Node Created - Inside Start")  # <----- ADDED
+        print("ROS2 Bridge Node Created - Inside Start", flush=True)
         rclpy.spin(ros2_bridge_node)
-        print("ROS2 Spin Finished - Inside Start")  # <----- ADDED
+        print("ROS2 Spin Finished - Inside Start", flush=True)
         # Clean up
         ros2_bridge_node.destroy_node()
-        rclpy.shutdown() # Move shutdown here
-        print("ROS2 Shutdown Completed - Inside Start")  # <----- ADDED
+        rclpy.shutdown()
+        print("ROS2 Shutdown Completed - Inside Start", flush=True)
 
 
     # Get the IOLoop instance
@@ -165,29 +176,30 @@ def main(args=None):
 
     # Create a new thread for ROS2
     ros2_thread = threading.Thread(target=start_ros2_bridge, daemon=True)
-    print("ROS2 Thread Created - Main")  # <----- ADDED
+    print("ROS2 Thread Created - Main", flush=True)
     ros2_thread.start()
-    print("ROS2 Thread Started - Main")  # <----- ADDED
+    print("ROS2 Thread Started - Main", flush=True)
 
     def start_tornado():
-        print("Starting Tornado Thread - Inside Start")
+        print("Starting Tornado Thread - Inside Start", flush=True)
         port = 8888  # Or any port you want
         app.listen(port)
-        print("Tornado Listening - Inside Start")
+        print("Tornado Listening - Inside Start", flush=True)
         try: #Wrap the call
+            print("Starting IOLoop", flush=True)
             ioloop.start()
-            print(f"Tornado server started on port {port}")
-            print("Tornado IOLoop Started - Inside Start")
+            print(f"Tornado server started on port {port}", flush=True)
+            print("Tornado IOLoop Started - Inside Start", flush=True)
         except Exception as e:
-            print(f"Tornado IOLoop encountered an error: {e}") # Print exception
-            e.print_exc() # Print the full traceback
+            print(f"Tornado IOLoop encountered an error: {e}", flush=True) # Print exception
+            traceback.print_exc() # Print the full traceback
 
-    tornado_thread = threading.Thread(target=start_tornado, daemon=False) # Removed Daemon
-    print("Tornado Thread Created - Main")  # <----- ADDED
+    tornado_thread = threading.Thread(target=start_tornado, daemon=False)
+    print("Tornado Thread Created - Main", flush=True)
     tornado_thread.start()
-    print("Tornado Thread Started - Main")  # <----- ADDED
+    print("Tornado Thread Started - Main", flush=True)
 
-    print("Server listening on port 8888")
+    print("Server listening on port 8888", flush=True)
     # Keep the main thread alive (for the web server)
     # ioloop.start() #The ioloop is already handled in the 'start_tornado' function
     # rclpy.spin(TemperatureSubscriber)
@@ -195,7 +207,7 @@ def main(args=None):
     # ioloop.add_callback(lambda: print("Tornado Ready!"))
     # ioloop.start() #The IOLoop is already started
 
-    print("Shutting down")
+    print("Shutting down", flush=True)
     # ioloop.stop() #Shut down the IOLoop - Removed
     # rclpy.shutdown() - Removed
     # The rclpy.shutdown is handled in the ROS2 thread.
