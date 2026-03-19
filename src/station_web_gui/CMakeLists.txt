@@ -24,14 +24,14 @@ install(
 
 install(
     DIRECTORY
-      src/static/
+      static/
     DESTINATION
       share/${PROJECT_NAME}/static
 )
 
 install(
     DIRECTORY
-      src/templates/
+      templates/
     DESTINATION
       share/${PROJECT_NAME}/templates
 )
