@@ -39,10 +39,18 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
     """Base class for WebSocket handlers with shared functionality."""
     def __init__(self, *args, **kwargs):
         Logger.info(f"{self.__class__.__name__} Kwargs: {kwargs}")
-        application = kwargs.pop('application', None)
+        web_gui_application = kwargs.pop('web_gui_application', None)
         super().__init__(*args, **kwargs)
-        self.application = application
+        self.web_gui_application = web_gui_application
         self.last_update = 0
+
+    def open(self):
+        Logger.info(f"{self.__class__.__name__} WebSocket opened")
+        self.web_gui_application.register_websocket_handler(self)
+
+    def on_close(self):
+        Logger.info(f"{self.__class__.__name__} WebSocket closed")
+        self.web_gui_application.unregister_websocket_handler(self)
 
 class TemperatureWebSocket(BaseWebSocketHandler):
     """Handles temperature WebSocket connections."""
@@ -50,24 +58,12 @@ class TemperatureWebSocket(BaseWebSocketHandler):
         try:
             data = json.loads(message)
             if "temperature" in data:
-                self.application.update_temperature(data["temperature"])
+                self.send_update(data["temperature"])
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
 
     def send_update(self, temperature: float):
         self.write_message(json.dumps({"temperature": temperature}))
-
-    def open(self):
-        print("Temperature WebSocket opened", flush=True)
-        # Store reference to this handler in the app
-        self.application.temperature_ws_handler = self
-
-    def on_close(self):
-        print("Temperature WebSocket closed", flush=True)
-        # Clear reference when closed
-        if self.application.temperature_ws_handler == self:
-            self.application.temperature_ws_handler = None
-
 
 
 class HumidityWebSocket(BaseWebSocketHandler):
@@ -76,23 +72,13 @@ class HumidityWebSocket(BaseWebSocketHandler):
         try:
             data = json.loads(message)
             if "humidity" in data:
-                self.application.update_humidity(data["humidity"])
+                self.send_update(data["humidity"])
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
 
     def send_update(self, humidity: float):
         self.write_message(json.dumps({"humidity": humidity}))
 
-    def open(self):
-        print("Humidity WebSocket opened", flush=True)
-        # Store reference to this handler in the app
-        self.application.humidity_ws_handler = self
-
-    def on_close(self):
-        print("Humidity WebSocket closed", flush=True)
-        # Clear reference when closed
-        if self.application.humidity_ws_handler == self:
-            self.application.humidity_ws_handler = None
 
 class ROS2Bridge(Node):
     """ROS2 node for handling sensor data."""
@@ -176,14 +162,11 @@ class StationWebGUIApp:
     def make_app(self):
         app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
-            (r'/temperature_ws', TemperatureWebSocket),
-            (r'/humidity_ws', HumidityWebSocket),
+            (r'/temperature_ws', TemperatureWebSocket(web_gui_application=self)),
+            (r'/humidity_ws', HumidityWebSocket(web_gui_application=self)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
-        app.temperature_value = 25
-        app.humidity_value = 60
-        app.temperature_ws_handler = None
-        app.humidity_ws_handler = None
+        
         return app
 
     def start_ros2_bridge(self):
@@ -201,7 +184,7 @@ class StationWebGUIApp:
         ros2_thread.start()
 
         try:
-            app.ioloop.start()
+            self.ioloop.start()
         except Exception as e:
             Logger.error(f"Tornado IOLoop encountered an error: {e}")
             traceback.print_exc()
