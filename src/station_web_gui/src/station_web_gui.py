@@ -123,14 +123,14 @@ class ROS2Bridge(Node):
     def update_temperature_web_sockets(self):
         if self.app.temperature_ws_handler:
             try:
-                self.app.temperature_ws_handler.write_message(json.dumps({"temperature": self.temperature_value}))
+                self.app.temperature_ws_handler.update_temperature(self.temperature_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending temperature to WebSocket: {e}")
 
     def update_humidity_web_sockets(self):
         if self.app.humidity_ws_handler:
             try:
-                self.app.humidity_ws_handler.write_message(json.dumps({"humidity": self.humidity_value}))
+                self.app.humidity_ws_handler.update_humidity(self.humidity_value)
             except Exception as e:
                 self.get_logger().error(f"Error sending humidity to WebSocket: {e}")
 
@@ -196,23 +196,10 @@ def main(args=None):
             traceback.print_exc() # Print the full traceback
 
     start_tornado()
-    #tornado_thread = threading.Thread(target=start_tornado, daemon=False)
-    #print("Tornado Thread Created - Main", flush=True)
-    #tornado_thread.start()
-    #print("Tornado Thread Started - Main", flush=True)
 
     print("Server listening on port 8888", flush=True)
-    # Keep the main thread alive (for the web server)
-    # ioloop.start() #The ioloop is already handled in the 'start_tornado' function
-    # rclpy.spin(TemperatureSubscriber)
-    # Remove the rclpy.spin and replace it with ioloop.add_callback
-    # ioloop.add_callback(lambda: print("Tornado Ready!"))
-    # ioloop.start() #The IOLoop is already started
 
     print("Shutting down", flush=True)
-    # ioloop.stop() #Shut down the IOLoop - Removed
-    # rclpy.shutdown() - Removed
-    # The rclpy.shutdown is handled in the ROS2 thread.
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
