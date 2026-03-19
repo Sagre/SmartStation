@@ -1,7 +1,7 @@
 /* style.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e9ecef; /* Light gray background */
     margin: 0;
     padding: 0;
     display: flex; /* Centers the content */
@@ -11,17 +11,17 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    background-color: #fff; /* White container */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 80%; /* Adjust the width as needed */
-    max-width: 600px; /* Limits the max-width to prevent extreme stretching */
+    max-width: 600px;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #007bff; /* Primary blue for the heading */
     margin-bottom: 20px;
 }
 
@@ -31,21 +31,23 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #dee2e6; /* Light gray borders */
     padding: 12px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #f0f8ff; /* Light blue header background */
     font-weight: bold;
+    color: #007bff; /* Primary blue for header text */
 }
 
 #temperature_value, #humidity_value {
     font-weight: bold;
+    color: #28a745; /* Green for temperature and humidity (you can choose different colors) */
 }
 
 /* Optional: Add some hover effects to the table rows */
 tbody tr:hover {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Slightly lighter background on hover */
 }
