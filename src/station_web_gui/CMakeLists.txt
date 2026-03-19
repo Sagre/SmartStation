@@ -42,4 +42,10 @@ install(
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(
+  PROGRAMS
+    src/sensor_config.cfg
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
