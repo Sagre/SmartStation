@@ -84,7 +84,7 @@ class HumidityWebSocket(tornado.websocket.WebSocketHandler):
 
 class ROS2Bridge(Node):
     def __init__(self, app):
-        super().init('ros2_web_bridge')
+        super().__init__('ros2_web_bridge')
         self.app = app # Reference to the Tornado application
         self.temperature_value = 25
         self.humidity_value = 60
