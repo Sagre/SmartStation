@@ -8,8 +8,8 @@
     <h1>Temperature: <span id="temperature_value">Loading...</span></h1>
     <h1>Humidity: <span id="humidity_value">Loading...</span></h1>
     <script type="text/javascript">
-        var temperatureSocket = new WebSocket("ws://localhost:8888/temperature_ws");
-        var humiditySocket = new WebSocket("ws://localhost:8888/humidity_ws");
+        var temperatureSocket = new WebSocket("ws://192.168.178.30:8888/temperature_ws");
+        var humiditySocket = new WebSocket("ws://192.168.178.30:8888/humidity_ws");
 
         temperatureSocket.onopen = function(event) {
             console.log("Temperature WebSocket opened");
