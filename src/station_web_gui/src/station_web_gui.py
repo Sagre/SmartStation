@@ -147,18 +147,16 @@ class StationWebGUIApp:
         self.temperature_value = temperature
         if self.temperature_ws_handler:
             try:
-                self.temperature_ws_handler.send_update(temperature)
+                self.ioloop.add_callback(self.temperature_ws_handler.send_update, temperature)
             except Exception as e:
                 Logger.error(f"Error sending temperature to WebSocket: {e}")
-
     def update_humidity(self, humidity: float):
         self.humidity_value = humidity
         if self.humidity_ws_handler:
             try:
-                self.humidity_ws_handler.send_update(humidity)
+                self.ioloop.add_callback(self.humidity_ws_handler.send_update, humidity)
             except Exception as e:
                 Logger.error(f"Error sending humidity to WebSocket: {e}")
-
     def make_app(self):
         app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
