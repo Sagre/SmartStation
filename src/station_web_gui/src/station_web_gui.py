@@ -9,21 +9,21 @@ import tornado.template
 import json
 import os
 import threading
-import traceback  # Import traceback
+import traceback
 
 class HomeHandler(tornado.web.RequestHandler):
     def initialize(self, template_loader):
         self.template_loader = template_loader
 
     async def get(self):
-        print("Get")
+        print("Get", flush=True)
         try:
             template = self.template_loader.load("index.html")
             self.write(template.generate(temperature_value=self.application.temperature_value,
                                         humidity_value=self.application.humidity_value))
         except Exception as e:
-            print(f"Error in HomeHandler: {e}", flush=True)  # Add this
-            traceback.print_exc()  # And this
+            print(f"Error in HomeHandler: {e}", flush=True)
+            traceback.print_exc()
             self.set_status(500)
             self.write(f"Error loading template: {e}")
 
@@ -137,9 +137,9 @@ class ROS2Bridge(Node):
 def make_app(template_path, static_path):
     app = tornado.web.Application([
         (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
-        (r'/temperature_ws', TemperatureWebSocket), # Comment out
-        (r'/humidity_ws', HumidityWebSocket), # Comment out
-        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
+        (r'/temperature_ws', TemperatureWebSocket),
+        (r'/humidity_ws', HumidityWebSocket),
+        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}),
     ], template_path=template_path, debug=True)
     app.temperature_value = 25
     app.humidity_value = 60
@@ -153,14 +153,14 @@ def main(args=None):
     # Get the current file's directory
     file_dir = os.path.dirname(os.path.abspath(__file__))
     template_path = os.path.join(file_dir, "templates")
-    static_path = os.path.join(file_dir, "static") # Get static path
+    static_path = os.path.join(file_dir, "static")  # Get static path
 
     # Create and start the Tornado application in a separate thread
     app = make_app(template_path, static_path)
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
-        print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
+        print("Starting ROS2 Bridge Thread - Inside Start", flush=True)  # Force printing.
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
         print("ROS2 Bridge Node Created - Inside Start", flush=True)
@@ -181,23 +181,27 @@ def main(args=None):
     ros2_thread.start()
     print("ROS2 Thread Started - Main", flush=True)
 
+    # Start Tornado *after* the ROS2 thread is running.
     def start_tornado():
         print("Starting Tornado Thread - Inside Start", flush=True)
-        port = 5000  # Or any port you want
-        app.listen(port)
-        print("Tornado Listening - Inside Start", flush=True)
-        try: #Wrap the call
+        port = 8888  # Or any port you want
+        app.listen(port)  # Listen on the port
+        print(f"Tornado server started on port {port}", flush=True)
+        try:
             print("Starting IOLoop", flush=True)
-            ioloop.start()
-            print(f"Tornado server started on port {port}", flush=True)
+            ioloop.start() # Start the Tornado IOLoop
             print("Tornado IOLoop Started - Inside Start", flush=True)
         except Exception as e:
-            print(f"Tornado IOLoop encountered an error: {e}", flush=True) # Print exception
-            traceback.print_exc() # Print the full traceback
+            print(f"Tornado IOLoop encountered an error: {e}", flush=True)  # Print exception
+            traceback.print_exc()  # Print the full traceback
 
-    start_tornado()
 
-    print("Server listening on port 8888", flush=True)
+    tornado_thread = threading.Thread(target=start_tornado, daemon=True)
+    tornado_thread.start() # Start the Tornado thread
+    print("Tornado Thread Started - Main", flush=True)
+
+
+    print("Server listening on port 8888", flush=True)  # Changed port
 
     print("Shutting down", flush=True)
 
