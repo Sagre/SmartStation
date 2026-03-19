@@ -163,14 +163,14 @@ def main(args=None):
     # Get the current file's directory
     file_dir = os.path.dirname(os.path.abspath(__file__))
     template_path = os.path.join(file_dir, "templates")
-    static_path = os.path.join(file_dir, "static")  # Get static path
+    static_path = os.path.join(file_dir, "static") # Get static path
 
     # Create and start the Tornado application in a separate thread
     app = make_app(template_path, static_path)
 
     # Create and start the ROS2 Bridge in a separate thread
     def start_ros2_bridge():
-        print("Starting ROS2 Bridge Thread - Inside Start", flush=True)  # Force printing.
+        print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
         nonlocal app
         ros2_bridge_node = ROS2Bridge(app)
         print("ROS2 Bridge Node Created - Inside Start", flush=True)
@@ -191,36 +191,24 @@ def main(args=None):
     ros2_thread.start()
     print("ROS2 Thread Started - Main", flush=True)
 
-    # Start Tornado *after* the ROS2 thread is running.
     def start_tornado():
         print("Starting Tornado Thread - Inside Start", flush=True)
-        port = 8888  # Or any port you want
-        app.listen(port)  # Listen on the port
-        print(f"Tornado server started on port {port}", flush=True)
-        try:
+        port = 5000  # Or any port you want
+        app.listen(port)
+        print("Tornado Listening - Inside Start", flush=True)
+        try: #Wrap the call
             print("Starting IOLoop", flush=True)
-            ioloop.start() # Start the Tornado IOLoop
+            ioloop.start()
+            print(f"Tornado server started on port {port}", flush=True)
             print("Tornado IOLoop Started - Inside Start", flush=True)
         except Exception as e:
-            print(f"Tornado IOLoop encountered an error: {e}", flush=True)  # Print exception
-            traceback.print_exc()  # Print the full traceback
+            print(f"Tornado IOLoop encountered an error: {e}", flush=True) # Print exception
+            traceback.print_exc() # Print the full traceback
 
+    start_tornado()
 
-    tornado_thread = threading.Thread(target=start_tornado, daemon=True)
-    tornado_thread.start() # Start the Tornado thread
-    print("Tornado Thread Started - Main", flush=True)
+    print("Server listening on port 8888", flush=True)
 
-
-    print("Server listening on port 8888", flush=True)  # Changed port
-    while True:
-        try:
-            time.sleep(1)  # Keep the main thread alive
-        except KeyboardInterrupt:
-            print("KeyboardInterrupt received, shutting down", flush=True)
-            break
-        except Exception as e:
-            print(f"Error in main loop: {e}", flush=True)
-            traceback.print_exc()
     print("Shutting down", flush=True)
 
 if __name__ == "__main__":
