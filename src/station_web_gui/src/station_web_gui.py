@@ -10,6 +10,7 @@ import json
 import os
 import threading
 import traceback
+import time
 
 class HomeHandler(tornado.web.RequestHandler):
     def initialize(self, template_loader):
@@ -208,9 +209,7 @@ def main(args=None):
     print("Server listening on port 8888", flush=True)  # Changed port
     while True:
         try:
-            # Keep the main thread alive to allow the server to run
-            tornado.ioloop.IOLoop.current().add_timeout(tornado.ioloop.timedelta(seconds=1), lambda: None)
-            tornado.ioloop.IOLoop.current().start()
+            time.sleep(1)  # Keep the main thread alive
         except KeyboardInterrupt:
             print("KeyboardInterrupt received, shutting down", flush=True)
             break
