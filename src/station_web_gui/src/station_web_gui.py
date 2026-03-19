@@ -9,75 +9,81 @@ import tornado.template
 import json
 import os
 import threading
-import traceback  # Import traceback
+import traceback
+from typing import Optional
 
-class HomeHandler(tornado.web.RequestHandler):
-    def initialize(self, template_loader):
-        self.template_loader = template_loader
+class Config:
+    """Centralized configuration settings."""
+    def __init__(self):
+        self.port = 8888
+        self.template_path = os.path.join(os.path.dirname(__file__), "templates")
+        self.static_path = os.path.join(os.path.dirname(__file__), "static")
+        self.default_temperature = 25.0
+        self.default_humidity = 60.0
 
+class Logger:
+    """Standardized logging utility."""
+    @staticmethod
+    def info(message: str):
+        print(f"INFO: {message}")
 
-    async def get(self):
-        print("Get")
+    @staticmethod
+    def error(message: str):
+        print(f"ERROR: {message}")
+
+    @staticmethod
+    def debug(message: str):
+        print(f"DEBUG: {message}")
+
+class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
+    """Base class for WebSocket handlers with shared functionality."""
+    def __init__(self, application, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.application = application
+        self.last_update = 0
+
+    def open(self):
+        Logger.info(f"{self.__class__.__name__} WebSocket opened")
+        self.application.register_websocket_handler(self)
+
+    def on_close(self):
+        Logger.info(f"{self.__class__.__name__} WebSocket closed")
+        self.application.unregister_websocket_handler(self)
+
+class TemperatureWebSocket(BaseWebSocketHandler):
+    """Handles temperature WebSocket connections."""
+    def on_message(self, message):
         try:
-            template = self.template_loader.load("index.html")
-            self.write(template.generate(temperature_value=self.application.temperature_value,
-                                        humidity_value=self.application.humidity_value))
-        except Exception as e:
-            print(f"Error in HomeHandler: {e}", flush=True)  # Add this
-            traceback.print_exc()  # And this
-            self.set_status(500)
-            self.write(f"Error loading template: {e}")
+            data = json.loads(message)
+            if "temperature" in data:
+                self.application.update_temperature(data["temperature"])
+        except json.JSONDecodeError:
+            Logger.error("Invalid JSON received")
 
-class TemperatureWebSocket(tornado.websocket.WebSocketHandler):
-    def initialize(self):
-        self.temperature = 25
-        self.last_update = 0
-        print("TemperatureWebSocket initialized", flush=True) # Add this
+    def send_update(self, temperature: float):
+        self.write_message(json.dumps({"temperature": temperature}))
 
-    def open(self):
-        print("Temperature WebSocket opened", flush=True)
-        # Store reference to this handler in the app
-        self.application.temperature_ws_handler = self
+class HumidityWebSocket(BaseWebSocketHandler):
+    """Handles humidity WebSocket connections."""
+    def on_message(self, message):
+        try:
+            data = json.loads(message)
+            if "humidity" in data:
+                self.application.update_humidity(data["humidity"])
+        except json.JSONDecodeError:
+            Logger.error("Invalid JSON received")
 
-    def on_close(self):
-        print("Temperature WebSocket closed", flush=True)
-        # Clear reference when closed
-        if self.application.temperature_ws_handler == self:
-            self.application.temperature_ws_handler = None
-    
-    def update_temperature(self, value):
-        self.temperature = value
-        self.last_update = tornado.ioloop.IOLoop.current().time()
-        self.write_message(json.dumps({"temperature": self.temperature}))
-
-class HumidityWebSocket(tornado.websocket.WebSocketHandler):
-    def initialize(self):
-        self.humidity = 60
-        self.last_update = 0
-        print("HumidityWebSocket initialized", flush=True)  # Add this
-
-    def open(self):
-        print("Humidity WebSocket opened", flush=True)
-        # Store reference to this handler in the app
-        self.application.humidity_ws_handler = self
-
-    def on_close(self):
-        print("Humidity WebSocket closed", flush=True)
-        # Clear reference when closed
-        if self.application.humidity_ws_handler == self:
-            self.application.humidity_ws_handler = None
-
-    def update_humidity(self, value):
-        self.humidity = value
-        self.last_update = tornado.ioloop.IOLoop.current().time()
-        self.write_message(json.dumps({"humidity": self.humidity}))
+    def send_update(self, humidity: float):
+        self.write_message(json.dumps({"humidity": humidity}))
 
 class ROS2Bridge(Node):
+    """ROS2 node for handling sensor data."""
     def __init__(self, app):
         super().__init__('ros2_web_bridge')
-        self.app = app # Reference to the Tornado application
-        self.temperature_value = 25
-        self.humidity_value = 60
+        self.app = app
+        self.temperature_value = app.config.default_temperature
+        self.humidity_value = app.config.default_humidity
+
         self.temperature_subscription = self.create_subscription(
             Float64,
             'temperature',
@@ -87,112 +93,117 @@ class ROS2Bridge(Node):
         self.humidity_subscription = self.create_subscription(
             Float64,
             'humidity',
-            self.humidity_callback,
             10
         )
-        self.get_logger().info('ROS2 Bridge Node started')
+        Logger.info('ROS2 Bridge Node started')
 
-
-    def temperature_callback(self, msg):
+    def temperature_callback(self, msg: Float64):
         try:
             self.temperature_value = msg.data
-            self.get_logger().info(f"Received temperature: {self.temperature_value}")
-            self.update_temperature_web_sockets()
+            Logger.debug(f"Received temperature: {self.temperature_value}")
+            self.app.update_temperature(self.temperature_value)
         except Exception as e:
-            self.get_logger().error(f"Error in temperature_callback: {e}")
+            Logger.error(f"Error in temperature_callback: {e}")
             traceback.print_exc()
 
-    def humidity_callback(self, msg):
+    def humidity_callback(self, msg: Float64):
         try:
             self.humidity_value = msg.data
-            self.get_logger().info(f"Received humidity: {self.humidity_value}")
-            self.update_humidity_web_sockets()
+            Logger.debug(f"Received humidity: {self.humidity_value}")
+            self.app.update_humidity(self.humidity_value)
         except Exception as e:
-            self.get_logger().error(f"Error in humidity_callback: {e}")
+            Logger.error(f"Error in humidity_callback: {e}")
             traceback.print_exc()
 
-    def update_temperature_web_sockets(self):
-        if self.app.temperature_ws_handler:
-            try:
-                self.app.temperature_ws_handler.update_temperature(self.temperature_value)
-            except Exception as e:
-                self.get_logger().error(f"Error sending temperature to WebSocket: {e}")
+class StationWebGUIApp:
+    """Main application class managing the web GUI."""
+    def __init__(self, config: Config):
+        self.config = config
+        self.temperature_value = config.default_temperature
+        self.humidity_value = config.default_humidity
+        self.temperature_ws_handler: Optional[TemperatureWebSocket] = None
+        self.humidity_ws_handler: Optional[HumidityWebSocket] = None
+        self.ros2_bridge: Optional[ROS2Bridge] = None
+        self.ioloop = tornado.ioloop.IOLoop.current()
 
-    def update_humidity_web_sockets(self):
-        if self.app.humidity_ws_handler:
-            try:
-                self.app.humidity_ws_handler.update_humidity(self.humidity_value)
-            except Exception as e:
-                self.get_logger().error(f"Error sending humidity to WebSocket: {e}")
+    def register_websocket_handler(self, handler: BaseWebSocketHandler):
+        if isinstance(handler, TemperatureWebSocket):
+            self.temperature_ws_handler = handler
+        elif isinstance(handler, HumidityWebSocket):
+            self.humidity_ws_handler = handler
 
-def make_app(template_path, static_path):
-    print(f"Creating Tornado application with template path: {template_path} and static path: {static_path}", flush=True)
-    app = tornado.web.Application([
-        (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(template_path))),
-        (r'/temperature_ws', TemperatureWebSocket),
-        (r'/humidity_ws', HumidityWebSocket),
-        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': static_path}), #Add static path
-    ], template_path=template_path, debug=True)
-    app.temperature_value = 25
-    app.humidity_value = 60
-    app.temperature_ws_handler = None
-    app.humidity_ws_handler = None
-    return app
+    def unregister_websocket_handler(self, handler: BaseWebSocketHandler):
+        if isinstance(handler, TemperatureWebSocket) and self.temperature_ws_handler == handler:
+            self.temperature_ws_handler = None
+        elif isinstance(handler, HumidityWebSocket) and self.humidity_ws_handler == handler:
+            self.humidity_ws_handler = None
+
+    def update_temperature(self, temperature: float):
+        self.temperature_value = temperature
+        if self.temperature_ws_handler:
+            try:
+                self.temperature_ws_handler.send_update(temperature)
+            except Exception as e:
+                Logger.error(f"Error sending temperature to WebSocket: {e}")
+
+    def update_humidity(self, humidity: float):
+        self.humidity_value = humidity
+        if self.humidity_ws_handler:
+            try:
+                self.humidity_ws_handler.send_update(humidity)
+            except Exception as e:
+                Logger.error(f"Error sending humidity to WebSocket: {e}")
+
+    def make_app(self):
+        return tornado.web.Application([
+            (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path))),
+            (r'/temperature_ws', TemperatureWebSocket, dict(application=self)),
+            (r'/humidity_ws', HumidityWebSocket, dict(application=self)),
+            (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
+        ], template_path=self.config.template_path, debug=True)
+
+    def start_ros2_bridge(self):
+        self.ros2_bridge = ROS2Bridge(self)
+        rclpy.spin(self.ros2_bridge)
+        self.ros2_bridge.destroy_node()
+        rclpy.shutdown()
+
+    def run(self):
+        app = self.make_app()
+        app.listen(self.config.port)
+        Logger.info(f"Tornado server started on port {self.config.port}")
+
+        ros2_thread = threading.Thread(target=self.start_ros2_bridge, daemon=True)
+        ros2_thread.start()
+
+        try:
+            self.ioloop.start()
+        except Exception as e:
+            Logger.error(f"Tornado IOLoop encountered an error: {e}")
+            traceback.print_exc()
+
+class HomeHandler(tornado.web.RequestHandler):
+    def initialize(self, template_loader, app):
+        self.template_loader = template_loader
+        self.app = app
+
+    async def get(self):
+        try:
+            template = self.template_loader.load("index.html")
+            self.write(template.generate(
+                temperature_value=self.app.temperature_value,
+                humidity_value=self.app.humidity_value
+            ))
+        except Exception as e:
+            Logger.error(f"Error loading template: {e}")
+            self.set_status(500)
+            self.write(f"Error loading template: {e}")
 
 def main(args=None):
     rclpy.init(args=args)
-
-
-    # Get the current file's directory
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    template_path = os.path.join(file_dir, "templates")
-    static_path = os.path.join(file_dir, "static") # Get static path
-
-    # Create and start the Tornado application in a separate thread
-    app = make_app(template_path, static_path)
-
-    # Create and start the ROS2 Bridge in a separate thread
-    def start_ros2_bridge():
-        print("Starting ROS2 Bridge Thread - Inside Start", flush=True) # Force printing.
-        nonlocal app
-        ros2_bridge_node = ROS2Bridge(app)
-        print("ROS2 Bridge Node Created - Inside Start", flush=True)
-        rclpy.spin(ros2_bridge_node)
-        print("ROS2 Spin Finished - Inside Start", flush=True)
-        # Clean up
-        ros2_bridge_node.destroy_node()
-        rclpy.shutdown()
-        print("ROS2 Shutdown Completed - Inside Start", flush=True)
-
-
-    # Get the IOLoop instance
-    ioloop = tornado.ioloop.IOLoop.current()
-
-    # Create a new thread for ROS2
-    ros2_thread = threading.Thread(target=start_ros2_bridge, daemon=True)
-    print("ROS2 Thread Created - Main", flush=True)
-    ros2_thread.start()
-    print("ROS2 Thread Started - Main", flush=True)
-
-    def start_tornado():
-        print("Starting Tornado Thread - Inside Start", flush=True)
-        port = 8888  # Or any port you want
-        app.listen(port)
-        print("Tornado Listening - Inside Start", flush=True)
-        try: #Wrap the call
-            print("Starting IOLoop", flush=True)
-            ioloop.start()
-            print(f"Tornado server started on port {port}", flush=True)
-            print("Tornado IOLoop Started - Inside Start", flush=True)
-        except Exception as e:
-            print(f"Tornado IOLoop encountered an error: {e}", flush=True) # Print exception
-            traceback.print_exc() # Print the full traceback
-
-    start_tornado()
-
-    print("Server listening on port 8888", flush=True)
-
-    print("Shutting down", flush=True)
+    config = Config()
+    app = StationWebGUIApp(config)
+    app.run()
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
