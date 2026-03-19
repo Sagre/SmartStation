@@ -39,8 +39,9 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
     """Base class for WebSocket handlers with shared functionality."""
     def __init__(self, *args, **kwargs):
         Logger.info(f"{self.__class__.__name__} Kwargs: {kwargs}")
+        application = kwargs.pop('application', None)
         super().__init__(*args, **kwargs)
-        self.application = kwargs.get('application')
+        self.application = application
         self.last_update = 0
 
     def open(self):
