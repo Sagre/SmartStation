@@ -185,7 +185,7 @@ def main(args=None):
 
     def start_tornado():
         print("Starting Tornado Thread - Inside Start", flush=True)
-        port = 5000  # Or any port you want
+        port = 8888  # Or any port you want
         app.listen(port)
         print("Tornado Listening - Inside Start", flush=True)
         try: #Wrap the call
