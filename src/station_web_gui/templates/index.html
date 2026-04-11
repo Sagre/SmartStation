@@ -2,7 +2,13 @@
 <html>
 <head>
     <title>Sensor Dashboard</title>
-    <link rel="stylesheet" href="static/style.css">
+    <style>
+        body { font-family: sans-serif; margin: 20px; background: #f4f4f9; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f8f8; font-weight: bold; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -18,9 +24,9 @@
             <tbody>
                 {% for sensor in sensor_config %}
                     <tr>
-                        <td>{{ sensor["representation"] }}</td>  <!-- Corrected line -->
-                        <td id="{{ sensor["id"] }}_value">Loading...</td> <!-- Corrected line -->
-                        <td>{{ sensor["unit"] }}</td>  <!-- Corrected line -->
+                        <td>{{ sensor.get('representation', 'Unknown') }}</td>
+                        <td id="{{ sensor.get('id', 'none') }}_value">Loading...</td>
+                        <td>{{ sensor.get('unit', '') }}</td>
                     </tr>
                 {% end %}
             </tbody>
@@ -28,29 +34,47 @@
     </div>
 
     <script type="text/javascript">
-        var ws = new WebSocket("/ws");
+        var ws = new WebSocket("ws://" + window.location.host + "/ws");
 
-        ws.onopen = function(event) {
-            console.log("WebSocket opened");
-        };
+        // Use the 'raw' directive to inject the JSON string exactly as it is
+        var lastSensorValues = {% raw last_sensor_values %};
 
-        ws.onmessage = function(event) {
-            var data = JSON.parse(event.data);
-            if (data.sensor_name) {
-                var element = document.getElementById(data.sensor_name + "_value"); // Use sensor_name for the ID
-                if (element) {
-                    element.innerText = data.value.toFixed(2);
-                }
+        function updateUI(sensorName, value) {
+            var element = document.getElementById(sensorName + "_value");
+            if (element) {
+                var num = parseFloat(value);
+                element.innerText = isNaN(num) ? value : num.toFixed(2);
+            }
+        }
+
+        function handleIncomingData(data) {
+            if (Array.isArray(data)) {
+                data.forEach(function(item) {
+                    if (item.sensor_name) {
+                        updateUI(item.sensor_name, item.value);
+                    }
+                });
+            } else if (data && data.sensor_name) {
+                updateUI(data.sensor_name, data.value);
+            }
+        }
+
+        window.onload = function() {
+            if (lastSensorValues) {
+                handleIncomingData(lastSensorValues);
             }
         };
 
-        ws.onclose = function(event) {
-            console.log("WebSocket closed");
+        ws.onmessage = function(event) {
+            try {
+                var data = JSON.parse(event.data);
+                handleIncomingData(data);
+            } catch (e) {
+                console.error("WebSocket Error:", e);
+            }
         };
 
-        ws.onerror = function(error) {
-            console.error("WebSocket error:", error);
-        };
+        ws.onopen = function() { console.log("Connected"); };
     </script>
 </body>
 </html>

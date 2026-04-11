@@ -1,41 +1,68 @@
 #!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import Float64
-import tornado.ioloop
-import tornado.web
-import tornado.websocket
-import tornado.template
-import json
 import os
+import json
 import threading
 import traceback
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Any
+
+import tornado.ioloop
+import tornado.template
+import tornado.web
+import tornado.websocket
+import yaml
+
+import rclpy
+from ament_index_python.packages import get_package_share_directory
+from rclpy.node import Node
+from std_msgs.msg import Float64, String
 
 class Config:
     """Centralized configuration settings."""
-    def __init__(self):
-        self.port = 8888
-        self.template_path = os.path.join(os.path.dirname(__file__), "templates")
-        self.static_path = os.path.join(os.path.dirname(__file__), "static")
-        self.config_file = "sensor_config.json" # Path to the configuration file
+    def __init__(self, node: Node):
+        share_dir = get_package_share_directory('station_web_gui')
+        self.station_config_path = node.declare_parameter(
+            'station_config_path',
+            os.path.join(os.getcwd(), 'config', 'station_params.yaml')
+        ).value
 
-        self.sensor_config: List[Dict] = self.load_sensor_config() # Load sensor configuration
+        self.station_config = self.load_station_config()
+
+        self.port = self.station_config.get('web_port', 8888)
+        self.template_path = node.declare_parameter('template_path', os.path.join(share_dir, 'templates')).value
+        self.static_path = node.declare_parameter('static_path', os.path.join(share_dir, 'static')).value
+        self.sensor_config = self.station_config.get('sensor_config', [])
+
+        if not self.sensor_config:
+            self.sensor_config = self.load_sensor_config()
+
+    def load_station_config(self) -> Dict[str, Any]:
+        try:
+            with open(self.station_config_path, 'r') as f:
+                config = yaml.safe_load(f)
+        except FileNotFoundError:
+            Logger.error(f'Station config file not found: {self.station_config_path}')
+            return {}
+        except Exception as e:
+            Logger.error(f'Error loading station config: {e}')
+            return {}
+
+        if not isinstance(config, dict):
+            Logger.error('Station config file must contain a YAML mapping')
+            return {}
+
+        return config.get('station_config', {})
 
     def load_sensor_config(self) -> List[Dict]:
-        """Loads sensor configuration from the JSON file."""
-        try:
-            with open(self.config_file, 'r') as f:
-                return json.load(f).get("sensors", []) # Added .get("sensors", []) to avoid errors if file is malformed.
-        except FileNotFoundError:
-            Logger.error(f"Configuration file not found: {self.config_file}")
+        """Loads sensor configuration from the station config file."""
+        if not self.station_config:
             return []
-        except json.JSONDecodeError:
-            Logger.error(f"Error decoding JSON in {self.config_file}")
+
+        sensor_config = self.station_config.get('sensor_config', [])
+        if not isinstance(sensor_config, list):
+            Logger.error('sensor_config in station config must be a list')
             return []
-        except Exception as e:
-            Logger.error(f"Error loading sensor config: {e}")
-            return []
+
+        return sensor_config
 
 class Logger:
     """Standardized logging utility."""
@@ -76,6 +103,7 @@ class SensorDataWebSocket(BaseWebSocketHandler):
 
     def on_message(self, message):
         try:
+            print(f"Received message: {message}")
             data = json.loads(message)
             if "sensor_name" in data and "value" in data:
                 self.sensor_data[data["sensor_name"]] = data["value"]
@@ -106,16 +134,19 @@ class ROS2Bridge(Node):
         sensor_id = sensor_config["id"]
         topic_name = sensor_config["topic"]
 
-        def callback(msg: Float64, sensor_id=sensor_id):
+        def callback(msg: String, sensor_id=sensor_id):
             try:
                 Logger.debug(f"Received {sensor_id}: {msg.data}")
-                self.send_sensor_data(sensor_id, msg.data)
+                json_data = json.loads(msg.data)
+                self.send_sensor_data(sensor_id, json_data["value"])
+            except json.JSONDecodeError:
+                Logger.error(f"Invalid JSON received on topic '{topic_name}': {msg.data}")
             except Exception as e:
                 Logger.error(f"Error in {sensor_id} callback: {e}")
                 traceback.print_exc()
 
         subscription = self.create_subscription(
-            Float64,
+            String,
             topic_name,
             callback,
             10
@@ -129,6 +160,8 @@ class ROS2Bridge(Node):
           if self.app.sensor_ws_handler:
               # Instead of updating data here, just send the message to the WS
               self.app.ioloop.add_callback(self.app.sensor_ws_handler.write_message, json.dumps(message))
+          # Also update the last sensor value in StationWebGUIApp
+          self.app.update_last_sensor_value(sensor_name, value)
       except Exception as e:
           Logger.error(f"Error sending data to sensor WebSocket: {e}")
 
@@ -139,6 +172,7 @@ class StationWebGUIApp:
         self.sensor_ws_handler: Optional[SensorDataWebSocket] = None # single handler
         self.ros2_bridge: Optional[ROS2Bridge] = None
         self.ioloop = tornado.ioloop.IOLoop.current()
+        self.last_sensor_values: Dict[str, float] = {} # Store last known sensor values
 
     def register_websocket_handler(self, handler: BaseWebSocketHandler):
         if isinstance(handler, SensorDataWebSocket):
@@ -148,7 +182,12 @@ class StationWebGUIApp:
         if isinstance(handler, SensorDataWebSocket) and self.sensor_ws_handler == handler:
             self.sensor_ws_handler = None
 
+    def update_last_sensor_value(self, sensor_name: str, value: float):
+        """Updates the last known value for a sensor."""
+        self.last_sensor_values[sensor_name] = value
+
     def make_app(self):
+        from tornado import escape
         app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path),
                                        web_gui_app=self)), # Pass the web_gui_app instance
@@ -185,8 +224,19 @@ class HomeHandler(tornado.web.RequestHandler):
 
     async def get(self):
         try:
-            # Pass the sensor configuration to the template
-            self.render("index.html", sensor_config=self.web_gui_app.config.sensor_config) # Access via web_gui_app
+            import json
+            adapted = []
+            for sensor, value in self.web_gui_app.last_sensor_values.items():
+                dic = {}
+                dic["sensor_name"] = sensor
+                dic["value"] = value
+                adapted.append(dic)
+                
+            print(f"Last sensor values: {adapted}")
+            last_sensor_values_json = json.dumps(adapted)
+            # Pass the sensor configuration and the last sensor values to the template
+            self.render("index.html", sensor_config=self.web_gui_app.config.sensor_config,
+                        last_sensor_values=last_sensor_values_json) # Access via web_gui_app
         except Exception as e:
             print(f"Error in HomeHandler: {e}", flush=True)
             traceback.print_exc()
@@ -195,7 +245,10 @@ class HomeHandler(tornado.web.RequestHandler):
 
 def main(args=None):
     rclpy.init(args=args)
-    config = Config()
+    config_node = rclpy.create_node('station_web_gui')
+    config = Config(config_node)
+    config_node.destroy_node()
+
     app = StationWebGUIApp(config)
     app.run()
 

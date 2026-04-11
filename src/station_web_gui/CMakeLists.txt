@@ -5,47 +5,27 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclpy REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# Install the Python script
+ament_python_install_package(${PROJECT_NAME} PACKAGE_DIR src/${PROJECT_NAME})
+
 install(
-  PROGRAMS
-    src/station_web_gui.py
-  DESTINATION lib/${PROJECT_NAME}
+  DIRECTORY
+    static/
+    templates/
+  DESTINATION share/station_web_gui
 )
 
 install(
-    DIRECTORY
-      static/
-    DESTINATION
-      lib/${PROJECT_NAME}/static
-)
-
-install(
-    DIRECTORY
-      templates/
-    DESTINATION
-      lib/${PROJECT_NAME}/templates
-)
-
-install(
-  PROGRAMS
-    src/sensor_publisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-install(
-  PROGRAMS
-    src/sensor_config.json
-  DESTINATION lib/${PROJECT_NAME}
+  FILES
+    src/station_web_gui/sensor_config.json
+  DESTINATION share/station_web_gui
 )
 
 ament_package()

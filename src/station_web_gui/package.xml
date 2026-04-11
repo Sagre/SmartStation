@@ -5,19 +5,24 @@
   <version>0.0.0</version>
   <description>ROS2 package for a Tornado web GUI showing temperature</description>
   <maintainer email="your_email@example.com">Your Name</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
 
+  <!-- Use 'depend' for packages used both at build and runtime -->
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
-  <depend>tornado</depend> <!-- Add the Tornado dependency -->
-  <depend>websockets</depend>  <!-- Add the websockets dependency -->
+  <depend>ament_index_python</depend>
+
+  <!-- External System Dependencies (Rosdep keys) -->
+  <exec_depend>python3-tornado</exec_depend>
+  <exec_depend>python3-websockets</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
   <export>
-    <build_type>ament_cmake</build_type>
+    <build_type>ament_python</build_type>
   </export>
 </package>
