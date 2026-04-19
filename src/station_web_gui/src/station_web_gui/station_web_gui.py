@@ -16,8 +16,9 @@ from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from std_msgs.msg import Float64, String
 
+from .sensor_metadata import SensorMetadataRegistry
+
 class Config:
-    """Centralized configuration settings."""
     def __init__(self, node: Node):
         share_dir = get_package_share_directory('station_web_gui')
         self.station_config_path = node.declare_parameter(
@@ -26,14 +27,10 @@ class Config:
         ).value
 
         self.station_config = self.load_station_config()
-
         self.port = self.station_config.get('web_port', 8888)
         self.template_path = node.declare_parameter('template_path', os.path.join(share_dir, 'templates')).value
         self.static_path = node.declare_parameter('static_path', os.path.join(share_dir, 'static')).value
-        self.sensor_config = self.station_config.get('sensor_config', [])
-
-        if not self.sensor_config:
-            self.sensor_config = self.load_sensor_config()
+        self.sensor_config = self.load_sensor_config()
 
     def load_station_config(self) -> Dict[str, Any]:
         try:
@@ -45,27 +42,25 @@ class Config:
         except Exception as e:
             Logger.error(f'Error loading station config: {e}')
             return {}
-
-        if not isinstance(config, dict):
-            Logger.error('Station config file must contain a YAML mapping')
-            return {}
-
-        return config.get('station_config', {})
+        return config.get('station_config', {}) if isinstance(config, dict) else {}
 
     def load_sensor_config(self) -> List[Dict]:
-        """Loads sensor configuration from the station config file."""
         if not self.station_config:
             return []
-
-        sensor_config = self.station_config.get('sensor_config', [])
-        if not isinstance(sensor_config, list):
-            Logger.error('sensor_config in station config must be a list')
+        
+        devices = self.station_config.get('devices', {})
+        if not devices or not isinstance(devices, dict):
+            Logger.error('No devices found in station config')
             return []
-
-        return sensor_config
+        
+        sensor_configs = []
+        for device_id, display_name in devices.items():
+            configs = SensorMetadataRegistry.generate_sensor_config(device_id, display_name)
+            sensor_configs.extend(configs)
+        
+        return sensor_configs
 
 class Logger:
-    """Standardized logging utility."""
     @staticmethod
     def info(message: str):
         print(f"INFO: {message}")
@@ -79,7 +74,6 @@ class Logger:
         print(f"DEBUG: {message}")
 
 class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
-    """Base class for WebSocket handlers with shared functionality."""
     def __init__(self, *args, **kwargs):
         Logger.info(f"{self.__class__.__name__} Kwargs: {kwargs}")
         web_gui_application = kwargs.pop('web_gui_application', None)
@@ -96,10 +90,9 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
         self.web_gui_application.unregister_websocket_handler(self)
 
 class SensorDataWebSocket(BaseWebSocketHandler):
-    """Generic WebSocket handler for sensor data."""
     def open(self):
         super().open()
-        self.sensor_data: Dict[str, float] = {}  # Store the latest sensor data, {sensor_name: value}
+        self.sensor_data: Dict[str, float] = {}
 
     def on_message(self, message):
         try:
@@ -107,8 +100,6 @@ class SensorDataWebSocket(BaseWebSocketHandler):
             data = json.loads(message)
             if "sensor_name" in data and "value" in data:
                 self.sensor_data[data["sensor_name"]] = data["value"]
-                # No need to send_update, the client will handle the logic,
-                #  as the old implementation.
         except json.JSONDecodeError:
             Logger.error("Invalid JSON received")
         except Exception as e:
@@ -116,7 +107,6 @@ class SensorDataWebSocket(BaseWebSocketHandler):
 
 
 class ROS2Bridge(Node):
-    """ROS2 node for handling sensor data."""
     def __init__(self, app):
         super().__init__('ros2_web_bridge')
         self.app = app
@@ -125,12 +115,10 @@ class ROS2Bridge(Node):
         Logger.info('ROS2 Bridge Node started')
 
     def initialize_subscriptions(self):
-        """Creates subscriptions based on the config."""
         for sensor in self.app.config.sensor_config:
             self.create_sensor_subscription(sensor)
 
     def create_sensor_subscription(self, sensor_config: Dict):
-        """Creates a subscription for a specific sensor topic."""
         sensor_id = sensor_config["id"]
         topic_name = sensor_config["topic"]
 
@@ -151,28 +139,24 @@ class ROS2Bridge(Node):
             callback,
             10
         )
-        self.topic_subscriptions[sensor_id] = subscription  # Keep track of subscriptions
+        self.topic_subscriptions[sensor_id] = subscription
 
     def send_sensor_data(self, sensor_name: str, value: float):
-      """Sends sensor data to the WebSocket."""
-      message = {"sensor_name": sensor_name, "value": value}
-      try:
-          if self.app.sensor_ws_handler:
-              # Instead of updating data here, just send the message to the WS
-              self.app.ioloop.add_callback(self.app.sensor_ws_handler.write_message, json.dumps(message))
-          # Also update the last sensor value in StationWebGUIApp
-          self.app.update_last_sensor_value(sensor_name, value)
-      except Exception as e:
-          Logger.error(f"Error sending data to sensor WebSocket: {e}")
+        message = {"sensor_name": sensor_name, "value": value}
+        try:
+            if self.app.sensor_ws_handler:
+                self.app.ioloop.add_callback(self.app.sensor_ws_handler.write_message, json.dumps(message))
+            self.app.update_last_sensor_value(sensor_name, value)
+        except Exception as e:
+            Logger.error(f"Error sending data to sensor WebSocket: {e}")
 
 class StationWebGUIApp:
-    """Main application class managing the web GUI."""
     def __init__(self, config: Config):
         self.config = config
-        self.sensor_ws_handler: Optional[SensorDataWebSocket] = None # single handler
+        self.sensor_ws_handler: Optional[SensorDataWebSocket] = None
         self.ros2_bridge: Optional[ROS2Bridge] = None
         self.ioloop = tornado.ioloop.IOLoop.current()
-        self.last_sensor_values: Dict[str, float] = {} # Store last known sensor values
+        self.last_sensor_values: Dict[str, float] = {}
 
     def register_websocket_handler(self, handler: BaseWebSocketHandler):
         if isinstance(handler, SensorDataWebSocket):
@@ -183,15 +167,14 @@ class StationWebGUIApp:
             self.sensor_ws_handler = None
 
     def update_last_sensor_value(self, sensor_name: str, value: float):
-        """Updates the last known value for a sensor."""
         self.last_sensor_values[sensor_name] = value
 
     def make_app(self):
         from tornado import escape
         app = tornado.web.Application([
             (r'/', HomeHandler, dict(template_loader=tornado.template.Loader(self.config.template_path),
-                                       web_gui_app=self)), # Pass the web_gui_app instance
-            (r'/ws', SensorDataWebSocket, dict(web_gui_application=self)), # Changed to a single websocket
+                                       web_gui_app=self)),
+            (r'/ws', SensorDataWebSocket, dict(web_gui_application=self)),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': self.config.static_path}),
         ], template_path=self.config.template_path, debug=True)
         app.sensor_ws_handler = None
@@ -218,25 +201,20 @@ class StationWebGUIApp:
             traceback.print_exc()
 
 class HomeHandler(tornado.web.RequestHandler):
-    def initialize(self, template_loader, web_gui_app): # Receive web_gui_app
+    def initialize(self, template_loader, web_gui_app):
         self.template_loader = template_loader
-        self.web_gui_app = web_gui_app # Store the web_gui_app instance
+        self.web_gui_app = web_gui_app
 
     async def get(self):
         try:
             import json
             adapted = []
             for sensor, value in self.web_gui_app.last_sensor_values.items():
-                dic = {}
-                dic["sensor_name"] = sensor
-                dic["value"] = value
-                adapted.append(dic)
-                
-            print(f"Last sensor values: {adapted}")
+                adapted.append({"sensor_name": sensor, "value": value})
+            
             last_sensor_values_json = json.dumps(adapted)
-            # Pass the sensor configuration and the last sensor values to the template
             self.render("index.html", sensor_config=self.web_gui_app.config.sensor_config,
-                        last_sensor_values=last_sensor_values_json) # Access via web_gui_app
+                        last_sensor_values=last_sensor_values_json)
         except Exception as e:
             print(f"Error in HomeHandler: {e}", flush=True)
             traceback.print_exc()
@@ -254,5 +232,4 @@ def main(args=None):
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
     main()

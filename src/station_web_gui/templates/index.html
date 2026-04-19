@@ -2,54 +2,130 @@
 <html>
 <head>
     <title>Sensor Dashboard</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; background: #f4f4f9; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f8f8f8; font-weight: bold; }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Sensor Data</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sensor</th>
-                    <th>Value</th>
-                    <th>Unit</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for sensor in sensor_config %}
-                    <tr>
-                        <td>{{ sensor.get('representation', 'Unknown') }}</td>
-                        <td id="{{ sensor.get('id', 'none') }}_value">Loading...</td>
-                        <td>{{ sensor.get('unit', '') }}</td>
-                    </tr>
-                {% end %}
-            </tbody>
-        </table>
+        <div id="devices-container"></div>
     </div>
 
     <script type="text/javascript">
         var ws = new WebSocket("ws://" + window.location.host + "/ws");
-
-        // Use the 'raw' directive to inject the JSON string exactly as it is
+        var sensorConfig = {% raw sensor_config %};
         var lastSensorValues = {% raw last_sensor_values %};
 
-        function updateUI(sensorName, value) {
-            var element = document.getElementById(sensorName + "_value");
+        function groupByDevice(sensors) {
+            const groups = {};
+            sensors.forEach(sensor => {
+                const deviceId = sensor.device_id || sensor.id.split('_')[0];
+                if (!groups[deviceId]) {
+                    groups[deviceId] = [];
+                }
+                groups[deviceId].push(sensor);
+            });
+            return groups;
+        }
+
+        function renderDevices() {
+            const container = document.getElementById('devices-container');
+            container.innerHTML = '';
+            const grouped = groupByDevice(sensorConfig);
+            
+            Object.keys(grouped).sort().forEach(deviceId => {
+                const sensors = grouped[deviceId];
+                const deviceName = sensors[0]?.device_name || deviceId;
+                
+                const deviceDiv = document.createElement('div');
+                deviceDiv.className = 'device-group';
+                
+                const deviceTitle = document.createElement('div');
+                deviceTitle.className = 'device-title';
+                deviceTitle.textContent = deviceName;
+                deviceDiv.appendChild(deviceTitle);
+                
+                const sensorsDiv = document.createElement('div');
+                sensorsDiv.className = 'sensors-grid';
+                
+                sensors.forEach(sensor => {
+                    const sensorCard = document.createElement('div');
+                    sensorCard.className = 'sensor-card';
+                    
+                    const label = document.createElement('div');
+                    label.className = 'sensor-label';
+                    label.textContent = sensor.label || sensor.representation || sensor.id;
+                    
+                    const valueUnit = document.createElement('div');
+                    valueUnit.className = 'sensor-value-unit';
+                    
+                    const value = document.createElement('span');
+                    value.className = 'sensor-value';
+                    value.id = sensor.id + '_value';
+                    value.textContent = 'Loading...';
+                    
+                    const unit = document.createElement('span');
+                    unit.className = 'sensor-unit';
+                    unit.textContent = sensor.unit;
+                    
+                    valueUnit.appendChild(value);
+                    valueUnit.appendChild(unit);
+                    
+                    sensorCard.appendChild(label);
+                    sensorCard.appendChild(valueUnit);
+
+                    const timestamp = document.createElement('div');
+                    timestamp.className = 'sensor-timestamp';
+                    timestamp.id = sensor.id + '_timestamp';
+                    timestamp.textContent = 'Waiting for update...';
+                    sensorCard.appendChild(timestamp);
+
+                    sensorsDiv.appendChild(sensorCard);
+                });
+                
+                deviceDiv.appendChild(sensorsDiv);
+                container.appendChild(deviceDiv);
+            });
+        }
+
+        function formatRelativeTime(ms) {
+            const seconds = Math.floor((Date.now() - ms) / 1000);
+            if (seconds < 5) {
+                return 'Updated just now';
+            }
+            if (seconds < 60) {
+                return `Updated ${seconds}s ago`;
+            }
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) {
+                return `Updated ${minutes} min ago`;
+            }
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) {
+                return `Updated ${hours} hr ago`;
+            }
+            const days = Math.floor(hours / 24);
+            return `Updated ${days} day${days === 1 ? '' : 's'} ago`;
+        }
+
+        function updateTimestamp(sensorName, timestamp) {
+            const element = document.getElementById(sensorName + '_timestamp');
             if (element) {
-                var num = parseFloat(value);
-                element.innerText = isNaN(num) ? value : num.toFixed(2);
+                element.textContent = formatRelativeTime(timestamp);
+            }
+        }
+
+        function updateUI(sensorName, value) {
+            const element = document.getElementById(sensorName + "_value");
+            if (element) {
+                const num = parseFloat(value);
+                element.textContent = isNaN(num) ? value : num.toFixed(2);
+                updateTimestamp(sensorName, Date.now());
             }
         }
 
         function handleIncomingData(data) {
             if (Array.isArray(data)) {
-                data.forEach(function(item) {
+                data.forEach(item => {
                     if (item.sensor_name) {
                         updateUI(item.sensor_name, item.value);
                     }
@@ -60,6 +136,7 @@
         }
 
         window.onload = function() {
+            renderDevices();
             if (lastSensorValues) {
                 handleIncomingData(lastSensorValues);
             }
@@ -67,7 +144,7 @@
 
         ws.onmessage = function(event) {
             try {
-                var data = JSON.parse(event.data);
+                const data = JSON.parse(event.data);
                 handleIncomingData(data);
             } catch (e) {
                 console.error("WebSocket Error:", e);

@@ -2,24 +2,6 @@ station_config:
   mqtt_broker_ip: 192.168.178.30
   mqtt_broker_port: 1883
   web_port: 8888
-  sensor_config:
-    - id: temperature
-      topic: temperature
-      representation: Temperature
-      unit: "°C"
-    - id: humidity
-      topic: humidity
-      representation: Humidity
-      unit: "%"
-    - id: pressure
-      topic: pressure
-      representation: Pressure
-      unit: "hPa"
-    - id: soil
-      topic: sensor/SmartProbe1/sensor_1
-      representation: Soil Test
-      unit: "%"
-    - id: soil2
-      topic: sensor/SmartProbe2/sensor_1
-      representation: Zuchtkasten
-      unit: "%"
+  devices:
+    SmartProbe1: "Wohnzimmerbeet"
+    SmartProbe2: "Flur"

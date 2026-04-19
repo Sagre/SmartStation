@@ -1,53 +1,103 @@
-/* style.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #e9ecef; /* Light gray background */
+    background-color: #f0f2f5;
     margin: 0;
-    padding: 0;
-    display: flex; /* Centers the content */
-    justify-content: center; /* Horizontally centers content */
-    align-items: center; /* Vertically centers content */
-    min-height: 100vh; /* Ensures content takes up at least the screen height */
+    padding: 20px;
 }
 
 .container {
-    background-color: #fff; /* White container */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 80%; /* Adjust the width as needed */
-    max-width: 600px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    color: #007bff; /* Primary blue for the heading */
-    margin-bottom: 20px;
+    color: #2c3e50;
+    margin-bottom: 30px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+#devices-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
 }
 
-th, td {
-    border: 1px solid #dee2e6; /* Light gray borders */
-    padding: 12px;
-    text-align: left;
+.device-group {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-th {
-    background-color: #f0f8ff; /* Light blue header background */
+.device-title {
+    font-size: 18px;
     font-weight: bold;
-    color: #007bff; /* Primary blue for header text */
+    color: #007bff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    text-align: center;
 }
 
-#temperature_value, #humidity_value {
+.sensors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.sensor-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.sensor-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.sensor-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sensor-value-unit {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+}
+
+.sensor-value {
+    font-size: 24px;
     font-weight: bold;
-    color: #28a745; /* Green for temperature and humidity (you can choose different colors) */
+    color: #28a745;
 }
 
-/* Optional: Add some hover effects to the table rows */
-tbody tr:hover {
-    background-color: #f9f9f9; /* Slightly lighter background on hover */
+.sensor-unit {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.sensor-timestamp {
+    margin-top: 8px;
+    font-size: 10px;
+    color: #777;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    opacity: 0.8;
 }
