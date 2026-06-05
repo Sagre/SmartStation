@@ -1,0 +1,42 @@
+[3.443s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_orchestrator build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log --single-version-externally-managed install_data
+[4.809s] running egg_info
+[4.812s] creating ../../build/station_orchestrator/station_orchestrator.egg-info
+[4.813s] writing ../../build/station_orchestrator/station_orchestrator.egg-info/PKG-INFO
+[4.814s] writing dependency_links to ../../build/station_orchestrator/station_orchestrator.egg-info/dependency_links.txt
+[4.814s] writing entry points to ../../build/station_orchestrator/station_orchestrator.egg-info/entry_points.txt
+[4.815s] writing requirements to ../../build/station_orchestrator/station_orchestrator.egg-info/requires.txt
+[4.816s] writing top-level names to ../../build/station_orchestrator/station_orchestrator.egg-info/top_level.txt
+[4.817s] writing manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'
+[4.824s] reading manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'
+[4.829s] writing manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'
+[4.830s] running build
+[4.831s] running build_py
+[4.831s] creating /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build
+[4.831s] creating /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib
+[4.832s] creating /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator
+[4.832s] copying station_orchestrator/__init__.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator
+[4.833s] copying station_orchestrator/orchestrator_node.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator
+[4.833s] copying station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator
+[4.834s] running install
+[4.836s] running install_lib
+[4.839s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator
+[4.840s] copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/__init__.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator
+[4.841s] copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/orchestrator_node.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator
+[4.842s] copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator
+[4.845s] byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/__init__.py to __init__.cpython-310.pyc
+[4.846s] byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/orchestrator_node.py to orchestrator_node.cpython-310.pyc
+[4.860s] byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/logger_service.py to logger_service.cpython-310.pyc
+[4.862s] running install_data
+[4.863s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index
+[4.863s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index/resource_index
+[4.864s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index/resource_index/packages
+[4.864s] copying resource/station_orchestrator -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index/resource_index/packages
+[4.865s] copying package.xml -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator
+[4.865s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/station_orchestrator
+[4.866s] copying scripts/station_orchestrator -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/station_orchestrator
+[4.866s] running install_egg_info
+[4.874s] Copying ../../build/station_orchestrator/station_orchestrator.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator-0.1.0-py3.10.egg-info
+[4.881s] running install_scripts
+[4.971s] Installing station_orchestrator script to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin
+[4.973s] writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log'
+[5.094s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator' returned '0': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_orchestrator build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log --single-version-externally-managed install_data

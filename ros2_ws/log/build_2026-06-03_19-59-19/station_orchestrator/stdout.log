@@ -1,0 +1,18 @@
+running develop
+running egg_info
+writing station_orchestrator.egg-info/PKG-INFO
+writing dependency_links to station_orchestrator.egg-info/dependency_links.txt
+writing entry points to station_orchestrator.egg-info/entry_points.txt
+writing requirements to station_orchestrator.egg-info/requires.txt
+writing top-level names to station_orchestrator.egg-info/top_level.txt
+reading manifest file 'station_orchestrator.egg-info/SOURCES.txt'
+writing manifest file 'station_orchestrator.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station-orchestrator.egg-link (link to .)
+Installing station_orchestrator script to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin
+
+Installed /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator
+running symlink_data
+symbolically linking /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/resource/station_orchestrator -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index/resource_index/packages
+symbolically linking /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/package.xml -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/station_orchestrator

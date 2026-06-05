@@ -1,0 +1,21 @@
+[3.514s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build --no-deps symlink_data --force
+[4.964s] running develop
+[5.919s] running egg_info
+[5.920s] writing station_orchestrator.egg-info/PKG-INFO
+[5.921s] writing dependency_links to station_orchestrator.egg-info/dependency_links.txt
+[5.922s] writing entry points to station_orchestrator.egg-info/entry_points.txt
+[5.923s] writing requirements to station_orchestrator.egg-info/requires.txt
+[5.924s] writing top-level names to station_orchestrator.egg-info/top_level.txt
+[5.933s] reading manifest file 'station_orchestrator.egg-info/SOURCES.txt'
+[5.937s] writing manifest file 'station_orchestrator.egg-info/SOURCES.txt'
+[5.943s] running build_ext
+[5.944s] Creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station-orchestrator.egg-link (link to .)
+[5.948s] Installing station_orchestrator script to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin
+[5.950s] 
+[5.951s] Installed /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator
+[5.951s] running symlink_data
+[5.951s] symbolically linking /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/resource/station_orchestrator -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/ament_index/resource_index/packages
+[5.952s] symbolically linking /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/package.xml -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator
+[5.953s] creating /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/station_orchestrator
+[5.954s] error: [Errno 2] No such file or directory: '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/station_orchestrator/station_orchestrator'
+[6.091s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator' returned '1': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build --no-deps symlink_data --force

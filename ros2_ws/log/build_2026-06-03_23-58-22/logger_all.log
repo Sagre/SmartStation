@@ -1,0 +1,184 @@
+[0.591s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.591s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffffa0fa2ad0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffa113fac0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffa113fac0>>, mixin_verb=('build',))
+[1.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.616s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.619s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.619s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.619s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.619s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.620s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/sagre/SmartStationNew/ros2_ws'
+[1.620s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.621s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.622s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.622s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.622s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.674s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[1.674s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[1.674s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[1.674s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[1.675s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[1.675s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.676s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[1.676s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[1.676s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['ignore', 'ignore_ament_install']
+[1.677s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'ignore'
+[1.677s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'ignore_ament_install'
+[1.677s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['colcon_pkg']
+[1.677s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'colcon_pkg'
+[1.677s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['colcon_meta']
+[1.678s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'colcon_meta'
+[1.678s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['ros']
+[1.678s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'ros'
+[1.678s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['cmake', 'python']
+[1.679s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'cmake'
+[1.679s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'python'
+[1.679s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extensions ['python_setup_py']
+[1.679s] Level 1:colcon.colcon_core.package_identification:_identify(config) by extension 'python_setup_py'
+[1.680s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.680s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[1.680s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[1.681s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.681s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[1.681s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[1.682s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[1.682s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[1.683s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[1.684s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[1.684s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[1.684s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[1.684s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[1.684s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[1.685s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[1.685s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extensions ['ignore', 'ignore_ament_install']
+[1.685s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extension 'ignore'
+[1.686s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extension 'ignore_ament_install'
+[1.686s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extensions ['colcon_pkg']
+[1.686s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extension 'colcon_pkg'
+[1.686s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extensions ['colcon_meta']
+[1.687s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extension 'colcon_meta'
+[1.687s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extensions ['ros']
+[1.687s] Level 1:colcon.colcon_core.package_identification:_identify(src/mqtt_ros2_bridge) by extension 'ros'
+[1.697s] DEBUG:colcon.colcon_core.package_identification:Package 'src/mqtt_ros2_bridge' with type 'ros.ament_python' and name 'mqtt_ros2_bridge'
+[1.697s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extensions ['ignore', 'ignore_ament_install']
+[1.698s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extension 'ignore'
+[1.698s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extension 'ignore_ament_install'
+[1.698s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extensions ['colcon_pkg']
+[1.698s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extension 'colcon_pkg'
+[1.699s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extensions ['colcon_meta']
+[1.699s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extension 'colcon_meta'
+[1.699s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extensions ['ros']
+[1.699s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_orchestrator) by extension 'ros'
+[1.701s] DEBUG:colcon.colcon_core.package_identification:Package 'src/station_orchestrator' with type 'ros.ament_python' and name 'station_orchestrator'
+[1.702s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extensions ['ignore', 'ignore_ament_install']
+[1.703s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extension 'ignore'
+[1.703s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extension 'ignore_ament_install'
+[1.703s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extensions ['colcon_pkg']
+[1.703s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extension 'colcon_pkg'
+[1.703s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extensions ['colcon_meta']
+[1.704s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extension 'colcon_meta'
+[1.704s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extensions ['ros']
+[1.704s] Level 1:colcon.colcon_core.package_identification:_identify(src/station_web_gui) by extension 'ros'
+[1.707s] DEBUG:colcon.colcon_core.package_identification:Package 'src/station_web_gui' with type 'ros.ament_python' and name 'station_web_gui'
+[1.708s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.708s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.708s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.708s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.708s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.855s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.855s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.869s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/sagre/SmartStationNew/ros2_ws/install
+[1.880s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 272 installed packages in /opt/ros/humble
+[1.888s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[2.144s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_args' from command line to 'None'
+[2.144s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_target' from command line to 'None'
+[2.145s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.145s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_clean_cache' from command line to 'False'
+[2.145s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_clean_first' from command line to 'False'
+[2.146s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'cmake_force_configure' from command line to 'False'
+[2.146s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'ament_cmake_args' from command line to 'None'
+[2.146s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'catkin_cmake_args' from command line to 'None'
+[2.146s] Level 5:colcon.colcon_core.verb:set package 'mqtt_ros2_bridge' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.147s] DEBUG:colcon.colcon_core.verb:Building package 'mqtt_ros2_bridge' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge', 'merge_install': False, 'path': '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge', 'symlink_install': False, 'test_result_base': None}
+[2.149s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_args' from command line to 'None'
+[2.149s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_target' from command line to 'None'
+[2.149s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.149s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_clean_cache' from command line to 'False'
+[2.150s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_clean_first' from command line to 'False'
+[2.150s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'cmake_force_configure' from command line to 'False'
+[2.150s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'ament_cmake_args' from command line to 'None'
+[2.150s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'catkin_cmake_args' from command line to 'None'
+[2.150s] Level 5:colcon.colcon_core.verb:set package 'station_orchestrator' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.151s] DEBUG:colcon.colcon_core.verb:Building package 'station_orchestrator' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator', 'merge_install': False, 'path': '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator', 'symlink_install': False, 'test_result_base': None}
+[2.153s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_args' from command line to 'None'
+[2.153s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_target' from command line to 'None'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_clean_cache' from command line to 'False'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_clean_first' from command line to 'False'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'cmake_force_configure' from command line to 'False'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'ament_cmake_args' from command line to 'None'
+[2.154s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'catkin_cmake_args' from command line to 'None'
+[2.155s] Level 5:colcon.colcon_core.verb:set package 'station_web_gui' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.155s] DEBUG:colcon.colcon_core.verb:Building package 'station_web_gui' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui', 'merge_install': False, 'path': '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui', 'symlink_install': False, 'test_result_base': None}
+[2.156s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.161s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.163s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge' with build type 'ament_python'
+[2.164s] Level 1:colcon.colcon_core.shell:create_environment_hook('mqtt_ros2_bridge', 'ament_prefix_path')
+[2.181s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.182s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/hook/ament_prefix_path.ps1'
+[2.187s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/hook/ament_prefix_path.dsv'
+[2.190s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/hook/ament_prefix_path.sh'
+[2.195s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.195s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.220s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator' with build type 'ament_python'
+[2.221s] Level 1:colcon.colcon_core.shell:create_environment_hook('station_orchestrator', 'ament_prefix_path')
+[2.223s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator/hook/ament_prefix_path.ps1'
+[2.226s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator/hook/ament_prefix_path.dsv'
+[2.229s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/share/station_orchestrator/hook/ament_prefix_path.sh'
+[2.233s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.233s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.258s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui' with build type 'ament_python'
+[2.259s] Level 1:colcon.colcon_core.shell:create_environment_hook('station_web_gui', 'ament_prefix_path')
+[2.262s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/hook/ament_prefix_path.ps1'
+[2.265s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/hook/ament_prefix_path.dsv'
+[2.268s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/hook/ament_prefix_path.sh'
+[2.272s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.272s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.763s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge'
+[3.764s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.765s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[5.288s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator'
+[5.290s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.290s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.979s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui'
+[6.980s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.980s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[8.866s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete was interrupted
+[8.866s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete again
+[9.130s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished
+[9.131s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[9.131s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[9.131s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[9.159s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[9.160s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[9.160s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[9.163s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[9.163s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[9.164s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sagre/SmartStationNew/ros2_ws/install/local_setup.ps1'
+[9.169s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sagre/SmartStationNew/ros2_ws/install/_local_setup_util_ps1.py'
+[9.178s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sagre/SmartStationNew/ros2_ws/install/setup.ps1'
+[9.184s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sagre/SmartStationNew/ros2_ws/install/local_setup.sh'
+[9.187s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sagre/SmartStationNew/ros2_ws/install/_local_setup_util_sh.py'
+[9.191s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sagre/SmartStationNew/ros2_ws/install/setup.sh'
+[9.198s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sagre/SmartStationNew/ros2_ws/install/local_setup.bash'
+[9.201s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sagre/SmartStationNew/ros2_ws/install/setup.bash'
+[9.207s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sagre/SmartStationNew/ros2_ws/install/local_setup.zsh'
+[9.210s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sagre/SmartStationNew/ros2_ws/install/setup.zsh'

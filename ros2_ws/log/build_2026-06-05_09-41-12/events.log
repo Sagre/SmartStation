@@ -1,0 +1,193 @@
+[0.000000] (-) TimerEvent: {}
+[0.000826] (mqtt_ros2_bridge) JobQueued: {'identifier': 'mqtt_ros2_bridge', 'dependencies': OrderedDict()}
+[0.004736] (station_orchestrator) JobQueued: {'identifier': 'station_orchestrator', 'dependencies': OrderedDict()}
+[0.004887] (station_web_gui) JobQueued: {'identifier': 'station_web_gui', 'dependencies': OrderedDict()}
+[0.004999] (mqtt_ros2_bridge) JobStarted: {'identifier': 'mqtt_ros2_bridge'}
+[0.059708] (station_orchestrator) JobStarted: {'identifier': 'station_orchestrator'}
+[0.095335] (-) TimerEvent: {}
+[0.099479] (station_web_gui) JobStarted: {'identifier': 'station_web_gui'}
+[0.195549] (-) TimerEvent: {}
+[0.296281] (-) TimerEvent: {}
+[0.397159] (-) TimerEvent: {}
+[0.497934] (-) TimerEvent: {}
+[0.598701] (-) TimerEvent: {}
+[0.699411] (-) TimerEvent: {}
+[0.800177] (-) TimerEvent: {}
+[0.900908] (-) TimerEvent: {}
+[1.001714] (-) TimerEvent: {}
+[1.102452] (-) TimerEvent: {}
+[1.203153] (-) TimerEvent: {}
+[1.304343] (-) TimerEvent: {}
+[1.405050] (-) TimerEvent: {}
+[1.505796] (-) TimerEvent: {}
+[1.606738] (-) TimerEvent: {}
+[1.708005] (-) TimerEvent: {}
+[1.809046] (-) TimerEvent: {}
+[1.909791] (-) TimerEvent: {}
+[2.010847] (-) TimerEvent: {}
+[2.111582] (-) TimerEvent: {}
+[2.212342] (-) TimerEvent: {}
+[2.313035] (-) TimerEvent: {}
+[2.413737] (-) TimerEvent: {}
+[2.514442] (-) TimerEvent: {}
+[2.615221] (-) TimerEvent: {}
+[2.716021] (-) TimerEvent: {}
+[2.816834] (-) TimerEvent: {}
+[2.917650] (-) TimerEvent: {}
+[3.018460] (-) TimerEvent: {}
+[3.119265] (-) TimerEvent: {}
+[3.220193] (-) TimerEvent: {}
+[3.321278] (-) TimerEvent: {}
+[3.422056] (-) TimerEvent: {}
+[3.522835] (-) TimerEvent: {}
+[3.623586] (-) TimerEvent: {}
+[3.724334] (-) TimerEvent: {}
+[3.825057] (-) TimerEvent: {}
+[3.925882] (-) TimerEvent: {}
+[4.026593] (-) TimerEvent: {}
+[4.127282] (-) TimerEvent: {}
+[4.228005] (-) TimerEvent: {}
+[4.328697] (-) TimerEvent: {}
+[4.429397] (-) TimerEvent: {}
+[4.530202] (-) TimerEvent: {}
+[4.630896] (-) TimerEvent: {}
+[4.731661] (-) TimerEvent: {}
+[4.833008] (-) TimerEvent: {}
+[4.934171] (-) TimerEvent: {}
+[5.035928] (-) TimerEvent: {}
+[5.136718] (-) TimerEvent: {}
+[5.240058] (-) TimerEvent: {}
+[5.342454] (-) TimerEvent: {}
+[5.444091] (-) TimerEvent: {}
+[5.544925] (-) TimerEvent: {}
+[5.645768] (-) TimerEvent: {}
+[5.746618] (-) TimerEvent: {}
+[5.847470] (-) TimerEvent: {}
+[5.948464] (-) TimerEvent: {}
+[6.049312] (-) TimerEvent: {}
+[6.151122] (-) TimerEvent: {}
+[6.252895] (-) TimerEvent: {}
+[6.354580] (-) TimerEvent: {}
+[6.456530] (-) TimerEvent: {}
+[6.558463] (-) TimerEvent: {}
+[6.661601] (-) TimerEvent: {}
+[6.762529] (-) TimerEvent: {}
+[6.863456] (-) TimerEvent: {}
+[6.964370] (-) TimerEvent: {}
+[7.065738] (-) TimerEvent: {}
+[7.167328] (-) TimerEvent: {}
+[7.268313] (-) TimerEvent: {}
+[7.369189] (-) TimerEvent: {}
+[7.472278] (-) TimerEvent: {}
+[7.573315] (-) TimerEvent: {}
+[7.676981] (-) TimerEvent: {}
+[7.779595] (-) TimerEvent: {}
+[7.836276] (station_orchestrator) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/station_orchestrator', 'build', '--build-base', '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build', 'install', '--record', '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sagre/SmartStationNew/ros2_ws/src/station_orchestrator', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sagre', 'SSH_CLIENT': '192.168.178.49 52709 22', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/home/sagre', 'OLDPWD': '/home/sagre/SmartStationNew', 'TERM_PROGRAM_VERSION': '1.123.0', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-cd86abbf-fa39-4d29-bcfb-7eb1660dbf6e.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/node', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'sagre', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '25', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/bin:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/remote-cli:/home/sagre/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-067fac2dff.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator', 'COPILOT_DEBUG_NONCE': '9c22069c928aa7e88f0a419df4b045dc', 'SSH_CONNECTION': '192.168.178.49 52709 192.168.178.30 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge'}, 'shell': False}
+[7.880354] (-) TimerEvent: {}
+[7.896628] (mqtt_ros2_bridge) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/mqtt_ros2_bridge', 'build', '--build-base', '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/build', 'install', '--record', '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sagre', 'SSH_CLIENT': '192.168.178.49 52709 22', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/home/sagre', 'OLDPWD': '/home/sagre/SmartStationNew', 'TERM_PROGRAM_VERSION': '1.123.0', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-cd86abbf-fa39-4d29-bcfb-7eb1660dbf6e.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/node', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'sagre', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '25', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/bin:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/remote-cli:/home/sagre/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-067fac2dff.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge', 'COPILOT_DEBUG_NONCE': '9c22069c928aa7e88f0a419df4b045dc', 'SSH_CONNECTION': '192.168.178.49 52709 192.168.178.30 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge'}, 'shell': False}
+[7.939537] (station_web_gui) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/station_web_gui', 'build', '--build-base', '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build', 'install', '--record', '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sagre', 'SSH_CLIENT': '192.168.178.49 52709 22', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/home/sagre', 'OLDPWD': '/home/sagre/SmartStationNew', 'TERM_PROGRAM_VERSION': '1.123.0', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-cd86abbf-fa39-4d29-bcfb-7eb1660dbf6e.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/node', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'sagre', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '25', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/bin:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/sagre/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/sagre/.vscode-server/bin/6a44c352bd24569c417e530095901b649960f9f8/bin/remote-cli:/home/sagre/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-067fac2dff.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui', 'COPILOT_DEBUG_NONCE': '9c22069c928aa7e88f0a419df4b045dc', 'SSH_CONNECTION': '192.168.178.49 52709 192.168.178.30 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge'}, 'shell': False}
+[7.980541] (-) TimerEvent: {}
+[8.082379] (-) TimerEvent: {}
+[8.184503] (-) TimerEvent: {}
+[8.285324] (-) TimerEvent: {}
+[8.386886] (-) TimerEvent: {}
+[8.487956] (-) TimerEvent: {}
+[8.589223] (-) TimerEvent: {}
+[8.690207] (-) TimerEvent: {}
+[8.791113] (-) TimerEvent: {}
+[8.892188] (-) TimerEvent: {}
+[8.993115] (-) TimerEvent: {}
+[9.093943] (-) TimerEvent: {}
+[9.195632] (-) TimerEvent: {}
+[9.296540] (-) TimerEvent: {}
+[9.397311] (-) TimerEvent: {}
+[9.498202] (-) TimerEvent: {}
+[9.599196] (-) TimerEvent: {}
+[9.700312] (-) TimerEvent: {}
+[9.738900] (station_orchestrator) StdoutLine: {'line': b'running egg_info\n'}
+[9.743993] (station_orchestrator) StdoutLine: {'line': b'writing ../../build/station_orchestrator/station_orchestrator.egg-info/PKG-INFO\n'}
+[9.745455] (station_orchestrator) StdoutLine: {'line': b'writing dependency_links to ../../build/station_orchestrator/station_orchestrator.egg-info/dependency_links.txt\n'}
+[9.750050] (station_orchestrator) StdoutLine: {'line': b'writing entry points to ../../build/station_orchestrator/station_orchestrator.egg-info/entry_points.txt\n'}
+[9.755488] (station_orchestrator) StdoutLine: {'line': b'writing requirements to ../../build/station_orchestrator/station_orchestrator.egg-info/requires.txt\n'}
+[9.756466] (station_orchestrator) StdoutLine: {'line': b'writing top-level names to ../../build/station_orchestrator/station_orchestrator.egg-info/top_level.txt\n'}
+[9.766270] (station_orchestrator) StdoutLine: {'line': b"reading manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'\n"}
+[9.772780] (station_orchestrator) StdoutLine: {'line': b"writing manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'\n"}
+[9.774015] (station_orchestrator) StdoutLine: {'line': b'running build\n'}
+[9.774935] (station_orchestrator) StdoutLine: {'line': b'running build_py\n'}
+[9.775930] (station_orchestrator) StdoutLine: {'line': b'copying station_orchestrator/logging_config.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator\n'}
+[9.776995] (station_orchestrator) StdoutLine: {'line': b'copying station_orchestrator/orchestrator_node.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator\n'}
+[9.778486] (station_orchestrator) StdoutLine: {'line': b'copying station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator\n'}
+[9.785359] (station_orchestrator) StdoutLine: {'line': b'running install\n'}
+[9.786893] (station_orchestrator) StdoutLine: {'line': b'running install_lib\n'}
+[9.792918] (station_orchestrator) StdoutLine: {'line': b'copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/logging_config.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator\n'}
+[9.794342] (station_orchestrator) StdoutLine: {'line': b'copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/orchestrator_node.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator\n'}
+[9.796460] (station_orchestrator) StdoutLine: {'line': b'copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator\n'}
+[9.800208] (station_orchestrator) StdoutLine: {'line': b'byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/logging_config.py to logging_config.cpython-310.pyc\n'}
+[9.801073] (-) TimerEvent: {}
+[9.811372] (station_orchestrator) StdoutLine: {'line': b'byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/orchestrator_node.py to orchestrator_node.cpython-310.pyc\n'}
+[9.825812] (station_web_gui) StdoutLine: {'line': b'running egg_info\n'}
+[9.829910] (station_web_gui) StdoutLine: {'line': b'writing ../../build/station_web_gui/station_web_gui.egg-info/PKG-INFO\n'}
+[9.831460] (station_web_gui) StdoutLine: {'line': b'writing dependency_links to ../../build/station_web_gui/station_web_gui.egg-info/dependency_links.txt\n'}
+[9.836569] (station_web_gui) StdoutLine: {'line': b'writing entry points to ../../build/station_web_gui/station_web_gui.egg-info/entry_points.txt\n'}
+[9.837295] (station_orchestrator) StdoutLine: {'line': b'byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/logger_service.py to logger_service.cpython-310.pyc\n'}
+[9.840205] (station_orchestrator) StdoutLine: {'line': b'running install_data\n'}
+[9.841630] (station_orchestrator) StdoutLine: {'line': b'running install_egg_info\n'}
+[9.845642] (station_web_gui) StdoutLine: {'line': b'writing requirements to ../../build/station_web_gui/station_web_gui.egg-info/requires.txt\n'}
+[9.849990] (station_web_gui) StdoutLine: {'line': b'writing top-level names to ../../build/station_web_gui/station_web_gui.egg-info/top_level.txt\n'}
+[9.851034] (station_orchestrator) StdoutLine: {'line': b"removing '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator-0.1.0-py3.10.egg-info' (and everything under it)\n"}
+[9.853933] (station_orchestrator) StdoutLine: {'line': b'Copying ../../build/station_orchestrator/station_orchestrator.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator-0.1.0-py3.10.egg-info\n'}
+[9.862612] (station_web_gui) StdoutLine: {'line': b"reading manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'\n"}
+[9.863946] (station_orchestrator) StdoutLine: {'line': b'running install_scripts\n'}
+[9.869188] (station_web_gui) StdoutLine: {'line': b"writing manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'\n"}
+[9.871192] (station_web_gui) StdoutLine: {'line': b'running build\n'}
+[9.872655] (station_web_gui) StdoutLine: {'line': b'running build_py\n'}
+[9.873609] (station_web_gui) StdoutLine: {'line': b'copying station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui\n'}
+[9.876033] (station_web_gui) StdoutLine: {'line': b'running install\n'}
+[9.878477] (station_web_gui) StdoutLine: {'line': b'running install_lib\n'}
+[9.884172] (station_web_gui) StdoutLine: {'line': b'copying /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui\n'}
+[9.889215] (station_web_gui) StdoutLine: {'line': b'byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui/station_web_gui.py to station_web_gui.cpython-310.pyc\n'}
+[9.901581] (-) TimerEvent: {}
+[9.907055] (station_web_gui) StdoutLine: {'line': b'running install_data\n'}
+[9.912153] (station_web_gui) StdoutLine: {'line': b'running install_egg_info\n'}
+[9.919385] (mqtt_ros2_bridge) StdoutLine: {'line': b'running egg_info\n'}
+[9.926015] (mqtt_ros2_bridge) StdoutLine: {'line': b'writing ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/PKG-INFO\n'}
+[9.926825] (station_web_gui) StdoutLine: {'line': b"removing '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info' (and everything under it)\n"}
+[9.927626] (mqtt_ros2_bridge) StdoutLine: {'line': b'writing dependency_links to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/dependency_links.txt\n'}
+[9.928979] (mqtt_ros2_bridge) StdoutLine: {'line': b'writing entry points to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/entry_points.txt\n'}
+[9.930384] (station_web_gui) StdoutLine: {'line': b'Copying ../../build/station_web_gui/station_web_gui.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info\n'}
+[9.931502] (mqtt_ros2_bridge) StdoutLine: {'line': b'writing requirements to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/requires.txt\n'}
+[9.932188] (mqtt_ros2_bridge) StdoutLine: {'line': b'writing top-level names to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/top_level.txt\n'}
+[9.940731] (mqtt_ros2_bridge) StdoutLine: {'line': b"reading manifest file '../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/SOURCES.txt'\n"}
+[9.950809] (mqtt_ros2_bridge) StdoutLine: {'line': b"writing manifest file '../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/SOURCES.txt'\n"}
+[9.951707] (mqtt_ros2_bridge) StdoutLine: {'line': b'running build\n'}
+[9.952372] (mqtt_ros2_bridge) StdoutLine: {'line': b'running build_py\n'}
+[9.953281] (station_web_gui) StdoutLine: {'line': b'running install_scripts\n'}
+[9.953993] (mqtt_ros2_bridge) StdoutLine: {'line': b'copying mqtt_ros2_bridge/bridge_node.py -> /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/build/lib/mqtt_ros2_bridge\n'}
+[9.954971] (mqtt_ros2_bridge) StdoutLine: {'line': b'running install\n'}
+[9.956417] (mqtt_ros2_bridge) StdoutLine: {'line': b'running install_lib\n'}
+[9.962961] (mqtt_ros2_bridge) StdoutLine: {'line': b'copying /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/build/lib/mqtt_ros2_bridge/bridge_node.py -> /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge\n'}
+[9.967496] (mqtt_ros2_bridge) StdoutLine: {'line': b'byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge/bridge_node.py to bridge_node.cpython-310.pyc\n'}
+[9.981735] (mqtt_ros2_bridge) StdoutLine: {'line': b'running install_data\n'}
+[9.984658] (mqtt_ros2_bridge) StdoutLine: {'line': b'running install_egg_info\n'}
+[9.996746] (mqtt_ros2_bridge) StdoutLine: {'line': b"removing '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info' (and everything under it)\n"}
+[9.997602] (station_orchestrator) StdoutLine: {'line': b'Installing station_orchestrator script to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin\n'}
+[10.000460] (station_orchestrator) StdoutLine: {'line': b"writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log'\n"}
+[10.001190] (mqtt_ros2_bridge) StdoutLine: {'line': b'Copying ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info\n'}
+[10.002435] (-) TimerEvent: {}
+[10.029332] (mqtt_ros2_bridge) StdoutLine: {'line': b'running install_scripts\n'}
+[10.091768] (station_web_gui) StdoutLine: {'line': b'Installing station_web_gui script to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin\n'}
+[10.094877] (station_web_gui) StdoutLine: {'line': b"writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log'\n"}
+[10.102787] (-) TimerEvent: {}
+[10.204132] (-) TimerEvent: {}
+[10.222012] (station_orchestrator) CommandEnded: {'returncode': 0}
+[10.236342] (mqtt_ros2_bridge) StdoutLine: {'line': b'Installing mqtt_ros2_bridge script to /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/bin\n'}
+[10.239408] (mqtt_ros2_bridge) StdoutLine: {'line': b"writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/install.log'\n"}
+[10.304412] (-) TimerEvent: {}
+[10.407077] (station_orchestrator) JobEnded: {'identifier': 'station_orchestrator', 'rc': 0}
+[10.416166] (-) TimerEvent: {}
+[10.416820] (station_web_gui) CommandEnded: {'returncode': 0}
+[10.502083] (station_web_gui) JobEnded: {'identifier': 'station_web_gui', 'rc': 0}
+[10.508384] (mqtt_ros2_bridge) CommandEnded: {'returncode': 0}
+[10.516353] (-) TimerEvent: {}
+[10.598117] (mqtt_ros2_bridge) JobEnded: {'identifier': 'mqtt_ros2_bridge', 'rc': 0}
+[10.605260] (-) EventReactorShutdown: {}

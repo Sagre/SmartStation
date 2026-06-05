@@ -1,0 +1,3 @@
+[console_scripts]
+station_web_gui = station_web_gui.station_web_gui:main
+

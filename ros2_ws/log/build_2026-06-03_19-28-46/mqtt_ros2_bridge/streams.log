@@ -1,0 +1,21 @@
+[5.171s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/mqtt_ros2_bridge build --build-base /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/build install --record /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/install.log --single-version-externally-managed install_data
+[6.688s] running egg_info
+[6.692s] writing ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/PKG-INFO
+[6.693s] writing dependency_links to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/dependency_links.txt
+[6.695s] writing entry points to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/entry_points.txt
+[6.696s] writing requirements to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/requires.txt
+[6.697s] writing top-level names to ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/top_level.txt
+[6.706s] reading manifest file '../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/SOURCES.txt'
+[6.717s] writing manifest file '../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info/SOURCES.txt'
+[6.719s] running build
+[6.720s] running build_py
+[6.721s] running install
+[6.722s] running install_lib
+[6.728s] running install_data
+[6.729s] running install_egg_info
+[6.738s] removing '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info' (and everything under it)
+[6.740s] Copying ../../build/mqtt_ros2_bridge/mqtt_ros2_bridge.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info
+[6.749s] running install_scripts
+[6.860s] Installing mqtt_ros2_bridge script to /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/bin
+[6.864s] writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/install.log'
+[7.069s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge' returned '0': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/mqtt_ros2_bridge build --build-base /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/build install --record /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/install.log --single-version-externally-managed install_data

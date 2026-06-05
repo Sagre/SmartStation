@@ -1,0 +1,12 @@
+source;share/station_orchestrator/hook/path.ps1
+source;share/station_orchestrator/hook/path.dsv
+source;share/station_orchestrator/hook/path.sh
+source;share/station_orchestrator/hook/pythonpath.ps1
+source;share/station_orchestrator/hook/pythonpath.dsv
+source;share/station_orchestrator/hook/pythonpath.sh
+source;share/station_orchestrator/hook/pythonscriptspath.ps1
+source;share/station_orchestrator/hook/pythonscriptspath.dsv
+source;share/station_orchestrator/hook/pythonscriptspath.sh
+source;share/station_orchestrator/hook/ament_prefix_path.ps1
+source;share/station_orchestrator/hook/ament_prefix_path.dsv
+source;share/station_orchestrator/hook/ament_prefix_path.sh

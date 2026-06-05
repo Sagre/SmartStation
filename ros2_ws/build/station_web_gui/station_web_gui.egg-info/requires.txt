@@ -1,0 +1,4 @@
+PyYAML
+setuptools
+tornado
+websockets

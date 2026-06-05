@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-89a12c1be9c13b13bdc8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "mqtt_ros2_bridge",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_mqtt_ros2_bridge_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_mqtt_ros2_bridge_egg-9a0f03fb202118d4a088.json",
+					"name" : "ament_cmake_python_build_mqtt_ros2_bridge_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_mqtt_ros2_bridge::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_mqtt_ros2_bridge-e8d411a4d1d865d6e607.json",
+					"name" : "ament_cmake_python_copy_mqtt_ros2_bridge",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_mqtt_ros2_bridge_setup::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_mqtt_ros2_bridge_setup-0071006ecfdafe672197.json",
+					"name" : "ament_cmake_python_copy_mqtt_ros2_bridge_setup",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mqtt_ros2_bridge_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mqtt_ros2_bridge_uninstall-37ed56f6cc3db82cb075.json",
+					"name" : "mqtt_ros2_bridge_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-ba85465eedad189da895.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge",
+		"source" : "/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

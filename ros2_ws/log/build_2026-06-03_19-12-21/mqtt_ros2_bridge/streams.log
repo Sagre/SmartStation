@@ -1,0 +1,35 @@
+[0.066s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge': /usr/bin/cmake /home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge
+[1.055s] -- The C compiler identification is GNU 11.4.0
+[1.826s] -- The CXX compiler identification is GNU 11.4.0
+[1.889s] -- Detecting C compiler ABI info
+[2.314s] -- Detecting C compiler ABI info - done
+[2.345s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.348s] -- Detecting C compile features
+[2.351s] -- Detecting C compile features - done
+[2.369s] -- Detecting CXX compiler ABI info
+[2.799s] -- Detecting CXX compiler ABI info - done
+[2.831s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.832s] -- Detecting CXX compile features
+[2.834s] -- Detecting CXX compile features - done
+[2.917s] -- Found ament_cmake: 1.3.13 (/opt/ros/humble/share/ament_cmake/cmake)
+[3.987s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[4.997s] [31mCMake Error at CMakeLists.txt:5 (find_package):
+[4.998s]   By not providing "Findament_python.cmake" in CMAKE_MODULE_PATH this project
+[4.998s]   has asked CMake to find a package configuration file provided by
+[4.998s]   "ament_python", but CMake did not find one.
+[4.999s] 
+[5.000s]   Could not find a package configuration file provided by "ament_python" with
+[5.000s]   any of the following names:
+[5.001s] 
+[5.002s]     ament_pythonConfig.cmake
+[5.003s]     ament_python-config.cmake
+[5.004s] 
+[5.005s]   Add the installation prefix of "ament_python" to CMAKE_PREFIX_PATH or set
+[5.005s]   "ament_python_DIR" to a directory containing one of the above files.  If
+[5.006s]   "ament_python" provides a separate development package or SDK, be sure it
+[5.007s]   has been installed.
+[5.008s] 
+[5.008s] [0m
+[5.009s] -- Configuring incomplete, errors occurred!
+[5.009s] See also "/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge/CMakeFiles/CMakeOutput.log".
+[5.016s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge' returned '1': /usr/bin/cmake /home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge

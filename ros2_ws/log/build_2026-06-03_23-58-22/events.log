@@ -1,0 +1,80 @@
+[0.000000] (-) TimerEvent: {}
+[0.001573] (mqtt_ros2_bridge) JobQueued: {'identifier': 'mqtt_ros2_bridge', 'dependencies': OrderedDict()}
+[0.001883] (station_orchestrator) JobQueued: {'identifier': 'station_orchestrator', 'dependencies': OrderedDict()}
+[0.002616] (station_web_gui) JobQueued: {'identifier': 'station_web_gui', 'dependencies': OrderedDict()}
+[0.002880] (mqtt_ros2_bridge) JobStarted: {'identifier': 'mqtt_ros2_bridge'}
+[0.057656] (station_orchestrator) JobStarted: {'identifier': 'station_orchestrator'}
+[0.095317] (station_web_gui) JobStarted: {'identifier': 'station_web_gui'}
+[0.096923] (-) TimerEvent: {}
+[0.197745] (-) TimerEvent: {}
+[0.298568] (-) TimerEvent: {}
+[0.399337] (-) TimerEvent: {}
+[0.500066] (-) TimerEvent: {}
+[0.600850] (-) TimerEvent: {}
+[0.701529] (-) TimerEvent: {}
+[0.802240] (-) TimerEvent: {}
+[0.903019] (-) TimerEvent: {}
+[1.003696] (-) TimerEvent: {}
+[1.104373] (-) TimerEvent: {}
+[1.205056] (-) TimerEvent: {}
+[1.305800] (-) TimerEvent: {}
+[1.406482] (-) TimerEvent: {}
+[1.507314] (-) TimerEvent: {}
+[1.608374] (-) TimerEvent: {}
+[1.709044] (-) TimerEvent: {}
+[1.809854] (-) TimerEvent: {}
+[1.910708] (-) TimerEvent: {}
+[2.011624] (-) TimerEvent: {}
+[2.112396] (-) TimerEvent: {}
+[2.213130] (-) TimerEvent: {}
+[2.313813] (-) TimerEvent: {}
+[2.414493] (-) TimerEvent: {}
+[2.515191] (-) TimerEvent: {}
+[2.615870] (-) TimerEvent: {}
+[2.716602] (-) TimerEvent: {}
+[2.817321] (-) TimerEvent: {}
+[2.918040] (-) TimerEvent: {}
+[3.018782] (-) TimerEvent: {}
+[3.119765] (-) TimerEvent: {}
+[3.220561] (-) TimerEvent: {}
+[3.321382] (-) TimerEvent: {}
+[3.422092] (-) TimerEvent: {}
+[3.522855] (-) TimerEvent: {}
+[3.623786] (-) TimerEvent: {}
+[3.724534] (-) TimerEvent: {}
+[3.825384] (-) TimerEvent: {}
+[3.926308] (-) TimerEvent: {}
+[4.027060] (-) TimerEvent: {}
+[4.127744] (-) TimerEvent: {}
+[4.228432] (-) TimerEvent: {}
+[4.329310] (-) TimerEvent: {}
+[4.430112] (-) TimerEvent: {}
+[4.530894] (-) TimerEvent: {}
+[4.631635] (-) TimerEvent: {}
+[4.732486] (-) TimerEvent: {}
+[4.834481] (-) TimerEvent: {}
+[4.935951] (-) TimerEvent: {}
+[5.037289] (-) TimerEvent: {}
+[5.138365] (-) TimerEvent: {}
+[5.239587] (-) TimerEvent: {}
+[5.342194] (-) TimerEvent: {}
+[5.443812] (-) TimerEvent: {}
+[5.545286] (-) TimerEvent: {}
+[5.647121] (-) TimerEvent: {}
+[5.748708] (-) TimerEvent: {}
+[5.850360] (-) TimerEvent: {}
+[5.952116] (-) TimerEvent: {}
+[6.058296] (-) TimerEvent: {}
+[6.159190] (-) TimerEvent: {}
+[6.261129] (-) TimerEvent: {}
+[6.363085] (-) TimerEvent: {}
+[6.464643] (-) TimerEvent: {}
+[6.566075] (-) TimerEvent: {}
+[6.667900] (-) TimerEvent: {}
+[6.769774] (-) TimerEvent: {}
+[6.871419] (-) TimerEvent: {}
+[6.945116] (station_web_gui) StderrLine: {'line': b'Traceback (most recent call last):\n  File "/usr/lib/python3/dist-packages/colcon_parallel_executor/executor/parallel.py", line 75, in execute\n    loop.run_until_complete(future)\n  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete\n    self.run_forever()\n  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever\n    self._run_once()\n  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once\n    event_list = self._selector.select(timeout)\n  File "/usr/lib/python3.10/selectors.py", line 469, in select\n    fd_event_list = self._selector.poll(timeout, max_ev)\nKeyboardInterrupt\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/lib/python3/dist-packages/colcon_core/executor/__init__.py", line 91, in __call__\n    rc = await self.task(*args, **kwargs)\n  File "/usr/lib/python3/dist-packages/colcon_core/task/__init__.py", line 93, in __call__\n    return await task_method(*args, **kwargs)\n  File "/usr/lib/python3/dist-packages/colcon_ros/task/ament_python/build.py", line 102, in build\n    return await extension.build(additional_hooks=additional_hooks)\n  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 96, in build\n    available_commands = await self._get_available_commands(\n  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 194, in _get_available_commands\n    output = await check_output(\n  File "/usr/lib/python3/dist-packages/colcon_core/subprocess.py", line 129, in check_output\n    assert not rc, f\'Expected {args} to pass: {stderr_data}\'\nAssertionError: Expected [\'/usr/bin/python3\', \'-W\', \'ignore:setup.py install is deprecated\', \'-W\', \'ignore:easy_install command is deprecated\', \'setup.py\', \'--help-commands\'] to pass: Traceback (most recent call last):\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2866, in get_entry_map\n    ep_map = self._ep_map\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2828, in __getattr__\n    raise AttributeError(attr)\nAttributeError: _ep_map. Did you mean: \'_dep_map\'?\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui/setup.py", line 7, in <module>\n    setup(\n  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 152, in setup\n    _install_setup_requires(attrs)\n  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 142, in _install_setup_requires\n    dist = MinimalDistribution(attrs)\n  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 134, in __init__\n    distutils.core.Distribution.__init__(self, filtered)\n  File "/usr/lib/python3/dist-packages/setuptools/dist.py", line 457, in __init__\n    for ep in pkg_resources.iter_entry_points(\'distutils.setup_keywords\'):\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 646, in <genexpr>\n    for entry in dist.get_entry_map(group).values()\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2868, in get_entry_map\n    ep_map = self._ep_map = EntryPoint.parse_map(\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2549, in parse_map\n    for group, lines in data:\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 3205, in split_sections\n    for line in yield_lines(s):\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2779, in _get_metadata\n    if self.has_metadata(name):\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1405, in has_metadata\n    path = self._get_metadata_path(name)\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1399, in _get_metadata_path\n    return self._fn(self.egg_info, name)\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1478, in _fn\n    self._validate_resource_path(resource_name)\n  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1539, in _validate_resource_path\n    ntpath.isabs(path)\n  File "/usr/lib/python3.10/ntpath.py", line 99, in isabs\n    return len(s) > 0 and s[0] in _get_bothseps(s)\nKeyboardInterrupt\n\n'}
+[6.950588] (station_web_gui) JobEnded: {'identifier': 'station_web_gui', 'rc': 'SIGINT'}
+[6.952601] (station_orchestrator) JobEnded: {'identifier': 'station_orchestrator', 'rc': 'SIGINT'}
+[6.957131] (mqtt_ros2_bridge) JobEnded: {'identifier': 'mqtt_ros2_bridge', 'rc': 'SIGINT'}
+[6.968745] (-) EventReactorShutdown: {}

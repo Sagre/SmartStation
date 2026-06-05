@@ -1,0 +1,12 @@
+source;share/station_web_gui/hook/path.ps1
+source;share/station_web_gui/hook/path.dsv
+source;share/station_web_gui/hook/path.sh
+source;share/station_web_gui/hook/pythonpath.ps1
+source;share/station_web_gui/hook/pythonpath.dsv
+source;share/station_web_gui/hook/pythonpath.sh
+source;share/station_web_gui/hook/pythonscriptspath.ps1
+source;share/station_web_gui/hook/pythonscriptspath.dsv
+source;share/station_web_gui/hook/pythonscriptspath.sh
+source;share/station_web_gui/hook/ament_prefix_path.ps1
+source;share/station_web_gui/hook/ament_prefix_path.dsv
+source;share/station_web_gui/hook/ament_prefix_path.sh

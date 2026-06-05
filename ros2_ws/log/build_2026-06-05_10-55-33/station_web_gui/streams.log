@@ -1,0 +1,25 @@
+[5.420s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui': AMENT_PREFIX_PATH=/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator:${AMENT_PREFIX_PATH} PATH=/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin:${PATH} PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_web_gui build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log --single-version-externally-managed install_data
+[6.906s] running egg_info
+[6.909s] writing ../../build/station_web_gui/station_web_gui.egg-info/PKG-INFO
+[6.912s] writing dependency_links to ../../build/station_web_gui/station_web_gui.egg-info/dependency_links.txt
+[6.913s] writing entry points to ../../build/station_web_gui/station_web_gui.egg-info/entry_points.txt
+[6.914s] writing requirements to ../../build/station_web_gui/station_web_gui.egg-info/requires.txt
+[6.914s] writing top-level names to ../../build/station_web_gui/station_web_gui.egg-info/top_level.txt
+[6.923s] reading manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+[6.930s] writing manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+[6.930s] running build
+[6.933s] running build_py
+[6.934s] copying station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui
+[6.938s] running install
+[6.940s] running install_lib
+[6.942s] copying /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui
+[6.944s] byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui/station_web_gui.py to station_web_gui.cpython-310.pyc
+[6.961s] running install_data
+[6.964s] copying package.xml -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui
+[6.964s] running install_egg_info
+[6.978s] removing '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info' (and everything under it)
+[6.980s] Copying ../../build/station_web_gui/station_web_gui.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info
+[6.988s] running install_scripts
+[7.084s] Installing station_web_gui script to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin
+[7.088s] writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log'
+[7.332s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui' returned '0': AMENT_PREFIX_PATH=/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator:${AMENT_PREFIX_PATH} PATH=/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin:${PATH} PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_web_gui build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log --single-version-externally-managed install_data

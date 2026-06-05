@@ -1,7 +1,0 @@
-station_config:
-  mqtt_broker_ip: 192.168.178.30
-  mqtt_broker_port: 1883
-  web_port: 8888
-  devices:
-    SmartProbe1: "Wohnzimmerbeet"
-    SmartProbe2: "Flur"

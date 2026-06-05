@@ -1,0 +1,70 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_parallel_executor/executor/parallel.py", line 75, in execute
+    loop.run_until_complete(future)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/executor/__init__.py", line 91, in __call__
+    rc = await self.task(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/colcon_core/task/__init__.py", line 93, in __call__
+    return await task_method(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/colcon_ros/task/ament_python/build.py", line 102, in build
+    return await extension.build(additional_hooks=additional_hooks)
+  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 96, in build
+    available_commands = await self._get_available_commands(
+  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 194, in _get_available_commands
+    output = await check_output(
+  File "/usr/lib/python3/dist-packages/colcon_core/subprocess.py", line 129, in check_output
+    assert not rc, f'Expected {args} to pass: {stderr_data}'
+AssertionError: Expected ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', '--help-commands'] to pass: Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2866, in get_entry_map
+    ep_map = self._ep_map
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2828, in __getattr__
+    raise AttributeError(attr)
+AttributeError: _ep_map. Did you mean: '_dep_map'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui/setup.py", line 7, in <module>
+    setup(
+  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 152, in setup
+    _install_setup_requires(attrs)
+  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 142, in _install_setup_requires
+    dist = MinimalDistribution(attrs)
+  File "/usr/lib/python3/dist-packages/setuptools/__init__.py", line 134, in __init__
+    distutils.core.Distribution.__init__(self, filtered)
+  File "/usr/lib/python3/dist-packages/setuptools/dist.py", line 457, in __init__
+    for ep in pkg_resources.iter_entry_points('distutils.setup_keywords'):
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 646, in <genexpr>
+    for entry in dist.get_entry_map(group).values()
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2868, in get_entry_map
+    ep_map = self._ep_map = EntryPoint.parse_map(
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2549, in parse_map
+    for group, lines in data:
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 3205, in split_sections
+    for line in yield_lines(s):
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 2779, in _get_metadata
+    if self.has_metadata(name):
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1405, in has_metadata
+    path = self._get_metadata_path(name)
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1399, in _get_metadata_path
+    return self._fn(self.egg_info, name)
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1478, in _fn
+    self._validate_resource_path(resource_name)
+  File "/usr/lib/python3/dist-packages/pkg_resources/__init__.py", line 1539, in _validate_resource_path
+    ntpath.isabs(path)
+  File "/usr/lib/python3.10/ntpath.py", line 99, in isabs
+    return len(s) > 0 and s[0] in _get_bothseps(s)
+KeyboardInterrupt
+

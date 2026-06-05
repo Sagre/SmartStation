@@ -1,0 +1,21 @@
+[12.109s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_web_gui build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log --single-version-externally-managed install_data
+[18.858s] running egg_info
+[18.861s] writing ../../build/station_web_gui/station_web_gui.egg-info/PKG-INFO
+[18.862s] writing dependency_links to ../../build/station_web_gui/station_web_gui.egg-info/dependency_links.txt
+[18.864s] writing entry points to ../../build/station_web_gui/station_web_gui.egg-info/entry_points.txt
+[18.866s] writing requirements to ../../build/station_web_gui/station_web_gui.egg-info/requires.txt
+[18.867s] writing top-level names to ../../build/station_web_gui/station_web_gui.egg-info/top_level.txt
+[18.875s] reading manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+[18.885s] writing manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+[18.896s] running build
+[18.896s] running build_py
+[18.898s] running install
+[18.900s] running install_lib
+[18.907s] running install_data
+[18.909s] running install_egg_info
+[18.922s] removing '/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info' (and everything under it)
+[18.924s] Copying ../../build/station_web_gui/station_web_gui.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info
+[18.932s] running install_scripts
+[19.028s] Installing station_web_gui script to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin
+[19.030s] writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log'
+[19.164s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/src/station_web_gui' returned '0': PYTHONPATH=/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/station_web_gui build --build-base /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build install --record /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log --single-version-externally-managed install_data

@@ -1,0 +1,48 @@
+-- Found ament_cmake: 1.3.13 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge
+Built target ament_cmake_python_copy_mqtt_ros2_bridge_setup
+Built target ament_cmake_python_copy_mqtt_ros2_bridge
+running egg_info
+creating mqtt_ros2_bridge.egg-info
+writing mqtt_ros2_bridge.egg-info/PKG-INFO
+writing dependency_links to mqtt_ros2_bridge.egg-info/dependency_links.txt
+writing entry points to mqtt_ros2_bridge.egg-info/entry_points.txt
+writing requirements to mqtt_ros2_bridge.egg-info/requires.txt
+writing top-level names to mqtt_ros2_bridge.egg-info/top_level.txt
+writing manifest file 'mqtt_ros2_bridge.egg-info/SOURCES.txt'
+reading manifest file 'mqtt_ros2_bridge.egg-info/SOURCES.txt'
+writing manifest file 'mqtt_ros2_bridge.egg-info/SOURCES.txt'
+Built target ament_cmake_python_build_mqtt_ros2_bridge_egg
+-- Install configuration: ""
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/pythonpath.sh
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/pythonpath.dsv
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/PKG-INFO
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/top_level.txt
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/SOURCES.txt
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/entry_points.txt
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/requires.txt
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge-0.1.0-py3.10.egg-info/dependency_links.txt
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge/__init__.py
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge/bridge_node.py
+Listing '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge'...
+Compiling '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge/__init__.py'...
+Compiling '/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/local/lib/python3.10/dist-packages/mqtt_ros2_bridge/bridge_node.py'...
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/ament_index/resource_index/package_run_dependencies/mqtt_ros2_bridge
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/ament_index/resource_index/parent_prefix_path/mqtt_ros2_bridge
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/ament_prefix_path.sh
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/ament_prefix_path.dsv
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/path.sh
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/environment/path.dsv
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/local_setup.bash
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/local_setup.sh
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/local_setup.zsh
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/local_setup.dsv
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/package.dsv
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/ament_index/resource_index/packages/mqtt_ros2_bridge
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/cmake/mqtt_ros2_bridgeConfig.cmake
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/cmake/mqtt_ros2_bridgeConfig-version.cmake
+-- Installing: /home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge/share/mqtt_ros2_bridge/package.xml

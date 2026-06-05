@@ -1,0 +1,22 @@
+running egg_info
+writing ../../build/station_orchestrator/station_orchestrator.egg-info/PKG-INFO
+writing dependency_links to ../../build/station_orchestrator/station_orchestrator.egg-info/dependency_links.txt
+writing entry points to ../../build/station_orchestrator/station_orchestrator.egg-info/entry_points.txt
+writing requirements to ../../build/station_orchestrator/station_orchestrator.egg-info/requires.txt
+writing top-level names to ../../build/station_orchestrator/station_orchestrator.egg-info/top_level.txt
+reading manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'
+writing manifest file '../../build/station_orchestrator/station_orchestrator.egg-info/SOURCES.txt'
+running build
+running build_py
+copying station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator
+running install
+running install_lib
+copying /home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/build/lib/station_orchestrator/logger_service.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator
+byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator/logger_service.py to logger_service.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator-0.1.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/station_orchestrator/station_orchestrator.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/lib/python3.10/site-packages/station_orchestrator-0.1.0-py3.10.egg-info
+running install_scripts
+Installing station_orchestrator script to /home/sagre/SmartStationNew/ros2_ws/install/station_orchestrator/bin
+writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_orchestrator/install.log'

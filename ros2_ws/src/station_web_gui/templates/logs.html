@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recent Logs</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Recent Logs</h1>
+
+        <nav>
+            <a href="/">Dashboard</a> | <a href="/logs">View Logs</a> | <a href="/control">Device Control</a>
+        </nav>
+
+        <div id="logs-container">
+            {% if logs %}
+                <table class="log-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Device ID</th>
+                            <th>Log Level</th>
+                            <th>Message</th>
+                            <th>Topic</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i, log in enumerate(logs) %}
+                            <tr class="{% if i % 2 == 0 %}even-row{% else %}odd-row{% end %}">
+                                <td class="log-cell">{{ log['timestamp'] }}</td>
+                                <td class="log-cell">{{ log['device_id'] }}</td>
+                                <td class="log-cell">{{ log['log_level'] }}</td>
+                                <td class="log-cell">{{ log['message'] }}</td>
+                                <td class="log-cell">{{ log['topic'] }}</td>
+                            </tr>
+                        {% end %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No logs found.</p>
+            {% end %}
+        </div>
+    </div>
+</body>
+</html>

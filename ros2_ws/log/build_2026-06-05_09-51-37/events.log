@@ -1,0 +1,67 @@
+[0.000000] (-) TimerEvent: {}
+[0.000713] (mqtt_ros2_bridge) JobQueued: {'identifier': 'mqtt_ros2_bridge', 'dependencies': OrderedDict()}
+[0.000965] (station_orchestrator) JobQueued: {'identifier': 'station_orchestrator', 'dependencies': OrderedDict()}
+[0.001141] (station_web_gui) JobQueued: {'identifier': 'station_web_gui', 'dependencies': OrderedDict()}
+[0.001299] (mqtt_ros2_bridge) JobStarted: {'identifier': 'mqtt_ros2_bridge'}
+[0.080679] (-) TimerEvent: {}
+[0.083488] (station_orchestrator) JobStarted: {'identifier': 'station_orchestrator'}
+[0.155193] (station_web_gui) JobStarted: {'identifier': 'station_web_gui'}
+[0.184125] (-) TimerEvent: {}
+[0.285622] (-) TimerEvent: {}
+[0.387456] (-) TimerEvent: {}
+[0.489352] (-) TimerEvent: {}
+[0.590889] (-) TimerEvent: {}
+[0.692009] (-) TimerEvent: {}
+[0.793131] (-) TimerEvent: {}
+[0.894175] (-) TimerEvent: {}
+[0.995930] (-) TimerEvent: {}
+[1.098824] (-) TimerEvent: {}
+[1.200959] (-) TimerEvent: {}
+[1.302428] (-) TimerEvent: {}
+[1.404338] (-) TimerEvent: {}
+[1.506236] (-) TimerEvent: {}
+[1.608576] (-) TimerEvent: {}
+[1.731094] (-) TimerEvent: {}
+[1.832127] (-) TimerEvent: {}
+[1.933192] (-) TimerEvent: {}
+[2.034086] (-) TimerEvent: {}
+[2.135002] (-) TimerEvent: {}
+[2.236946] (-) TimerEvent: {}
+[2.338675] (-) TimerEvent: {}
+[2.440447] (-) TimerEvent: {}
+[2.542201] (-) TimerEvent: {}
+[2.643948] (-) TimerEvent: {}
+[2.745749] (-) TimerEvent: {}
+[2.847719] (-) TimerEvent: {}
+[2.949850] (-) TimerEvent: {}
+[3.051831] (-) TimerEvent: {}
+[3.070939] (mqtt_ros2_bridge) JobEnded: {'identifier': 'mqtt_ros2_bridge', 'rc': 0}
+[3.152047] (-) TimerEvent: {}
+[3.253527] (-) TimerEvent: {}
+[3.354851] (-) TimerEvent: {}
+[3.456192] (-) TimerEvent: {}
+[3.558196] (-) TimerEvent: {}
+[3.659286] (-) TimerEvent: {}
+[3.760246] (-) TimerEvent: {}
+[3.861076] (-) TimerEvent: {}
+[3.961920] (-) TimerEvent: {}
+[4.063317] (-) TimerEvent: {}
+[4.164108] (-) TimerEvent: {}
+[4.265014] (-) TimerEvent: {}
+[4.366009] (-) TimerEvent: {}
+[4.466878] (-) TimerEvent: {}
+[4.567923] (-) TimerEvent: {}
+[4.669958] (-) TimerEvent: {}
+[4.773030] (-) TimerEvent: {}
+[4.874108] (-) TimerEvent: {}
+[4.975019] (-) TimerEvent: {}
+[5.076872] (-) TimerEvent: {}
+[5.179269] (-) TimerEvent: {}
+[5.280570] (-) TimerEvent: {}
+[5.381320] (-) TimerEvent: {}
+[5.482264] (-) TimerEvent: {}
+[5.583708] (-) TimerEvent: {}
+[5.672371] (station_orchestrator) JobEnded: {'identifier': 'station_orchestrator', 'rc': 'SIGINT'}
+[5.674872] (station_web_gui) JobEnded: {'identifier': 'station_web_gui', 'rc': 'SIGINT'}
+[5.683959] (-) TimerEvent: {}
+[5.684682] (-) EventReactorShutdown: {}

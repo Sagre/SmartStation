@@ -1,0 +1,33 @@
+[0.000000] (-) TimerEvent: {}
+[0.001341] (mqtt_ros2_bridge) JobQueued: {'identifier': 'mqtt_ros2_bridge', 'dependencies': OrderedDict()}
+[0.001591] (station_orchestrator) JobQueued: {'identifier': 'station_orchestrator', 'dependencies': OrderedDict()}
+[0.001903] (station_web_gui) JobQueued: {'identifier': 'station_web_gui', 'dependencies': OrderedDict()}
+[0.002084] (mqtt_ros2_bridge) JobStarted: {'identifier': 'mqtt_ros2_bridge'}
+[0.046092] (station_orchestrator) JobStarted: {'identifier': 'station_orchestrator'}
+[0.079515] (station_web_gui) JobStarted: {'identifier': 'station_web_gui'}
+[0.098245] (-) TimerEvent: {}
+[0.198954] (-) TimerEvent: {}
+[0.299675] (-) TimerEvent: {}
+[0.400372] (-) TimerEvent: {}
+[0.501141] (-) TimerEvent: {}
+[0.601930] (-) TimerEvent: {}
+[0.702853] (-) TimerEvent: {}
+[0.790423] (mqtt_ros2_bridge) JobEnded: {'identifier': 'mqtt_ros2_bridge', 'rc': 0}
+[0.803461] (-) TimerEvent: {}
+[0.904396] (-) TimerEvent: {}
+[1.005099] (-) TimerEvent: {}
+[1.105845] (-) TimerEvent: {}
+[1.206745] (-) TimerEvent: {}
+[1.307743] (-) TimerEvent: {}
+[1.408392] (-) TimerEvent: {}
+[1.509092] (-) TimerEvent: {}
+[1.609791] (-) TimerEvent: {}
+[1.710474] (-) TimerEvent: {}
+[1.811128] (-) TimerEvent: {}
+[1.911807] (-) TimerEvent: {}
+[2.012494] (-) TimerEvent: {}
+[2.113167] (-) TimerEvent: {}
+[2.213959] (-) TimerEvent: {}
+[2.269904] (station_web_gui) JobEnded: {'identifier': 'station_web_gui', 'rc': 'SIGINT'}
+[2.271548] (station_orchestrator) JobEnded: {'identifier': 'station_orchestrator', 'rc': 'SIGINT'}
+[2.282350] (-) EventReactorShutdown: {}

@@ -1,0 +1,17 @@
+mqtt_broker_ip: 192.168.178.30
+mqtt_broker_port: 1883
+use_local_broker: true
+web_port: 8888
+web_host: 127.0.0.1
+devices:
+  SmartProbe1: "Wohnzimmerbeet"
+  SmartProbe2: "Flur"
+topic_filters:
+  - sensor/#
+  - device/+/battery_soc
+  - control/#
+  - log/#
+allow_all_topics: true
+publisher_limit: 200
+startup_retries: 3
+retry_backoff_seconds: 2

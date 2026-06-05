@@ -1,0 +1,43 @@
+running egg_info
+creating ../../build/station_web_gui/station_web_gui.egg-info
+writing ../../build/station_web_gui/station_web_gui.egg-info/PKG-INFO
+writing dependency_links to ../../build/station_web_gui/station_web_gui.egg-info/dependency_links.txt
+writing entry points to ../../build/station_web_gui/station_web_gui.egg-info/entry_points.txt
+writing requirements to ../../build/station_web_gui/station_web_gui.egg-info/requires.txt
+writing top-level names to ../../build/station_web_gui/station_web_gui.egg-info/top_level.txt
+writing manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+reading manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+writing manifest file '../../build/station_web_gui/station_web_gui.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build
+creating /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib
+creating /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui
+copying station_web_gui/__init__.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui
+copying station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui
+copying station_web_gui/sensor_metadata.py -> /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui
+running install
+running install_lib
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui
+copying /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui/__init__.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui
+copying /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui/station_web_gui.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui
+copying /home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/build/lib/station_web_gui/sensor_metadata.py -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui
+byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui/station_web_gui.py to station_web_gui.cpython-310.pyc
+byte-compiling /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui/sensor_metadata.py to sensor_metadata.cpython-310.pyc
+running install_data
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/ament_index
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/ament_index/resource_index
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/ament_index/resource_index/packages
+copying resource/station_web_gui -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/ament_index/resource_index/packages
+copying package.xml -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/templates
+copying templates/logs.html -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/templates
+copying templates/index.html -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/templates
+creating /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/static
+copying static/style.css -> /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/share/station_web_gui/static
+running install_egg_info
+Copying ../../build/station_web_gui/station_web_gui.egg-info to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/lib/python3.10/site-packages/station_web_gui-0.1.0-py3.10.egg-info
+running install_scripts
+Installing station_web_gui script to /home/sagre/SmartStationNew/ros2_ws/install/station_web_gui/bin
+writing list of installed files to '/home/sagre/SmartStationNew/ros2_ws/build/station_web_gui/install.log'

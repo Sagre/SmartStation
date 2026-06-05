@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: station-web-gui
+Version: 0.1.0
+Summary: ROS2 package for a web GUI showing sensor data from SmartStation devices
+Home-page: UNKNOWN
+Maintainer: SmartStation
+Maintainer-email: devnull@example.com
+License: Apache-2.0
+Platform: UNKNOWN
+
+UNKNOWN
+

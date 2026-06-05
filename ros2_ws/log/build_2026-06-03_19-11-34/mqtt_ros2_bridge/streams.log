@@ -1,0 +1,4 @@
+[0.061s] Invoking command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge': /usr/bin/cmake /home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge
+[0.100s] [0mCMake Error: The source directory "/home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge" does not appear to contain CMakeLists.txt.
+[0.101s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.108s] Invoked command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge' returned '1': /usr/bin/cmake /home/sagre/SmartStationNew/ros2_ws/src/mqtt_ros2_bridge -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sagre/SmartStationNew/ros2_ws/install/mqtt_ros2_bridge

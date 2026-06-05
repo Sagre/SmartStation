@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Control</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .control-section {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-control {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .device-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .battery-info {
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .battery-bar {
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            border: 1px solid #333;
+            border-radius: 3px;
+            background: linear-gradient(to right, #f0f0f0 0%, #f0f0f0 100%);
+            margin-left: 10px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .battery-level {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(to right, #00c851, #ffbb33);
+            transition: width 0.3s ease;
+        }
+
+        .control-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-reboot {
+            background-color: #ff6b6b;
+        }
+
+        .btn-reboot:hover {
+            background-color: #ee5a52;
+            transform: translateY(-2px);
+        }
+
+        /* New Calibration button style */
+        .btn-calibrate {
+            background-color: #fd7e14;
+        }
+
+        .btn-calibrate:hover {
+            background-color: #f76707;
+            transform: translateY(-2px);
+        }
+
+        .status-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        nav {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Device Control</h1>
+
+        <nav>
+            <a href="/">Dashboard</a> | <a href="/logs">View Logs</a> | <a href="/control">Device Control</a>
+        </nav>
+
+        <div id="controls-container"></div>
+    </div>
+
+    <script type="text/javascript">
+        var devicesData = {% raw devices %};
+
+        function formatBatteryPercentage(value) {
+            if (value === 'N/A' || value === null || value === undefined) {
+                return 0;
+            }
+            const num = parseFloat(value);
+            return isNaN(num) ? 0 : Math.min(100, Math.max(0, num));
+        }
+
+        function renderDevices() {
+            const container = document.getElementById('controls-container');
+            container.innerHTML = '';
+
+            if (!devicesData || devicesData.length === 0) {
+                container.innerHTML = '<p>No devices configured.</p>';
+                return;
+            }
+
+            devicesData.forEach(device => {
+                const deviceDiv = document.createElement('div');
+                deviceDiv.className = 'device-control';
+
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'device-header';
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'device-name';
+                nameSpan.textContent = device.name;
+
+                const batterySpan = document.createElement('span');
+                batterySpan.className = 'battery-info';
+                const batteryPercent = formatBatteryPercentage(device.battery);
+                batterySpan.innerHTML = 'Battery: ' + batteryPercent.toFixed(0) + '%' +
+                    '<div class="battery-bar"><div class="battery-level" style="width: ' + batteryPercent + '%;"></div></div>';
+
+                headerDiv.appendChild(nameSpan);
+                headerDiv.appendChild(batterySpan);
+                deviceDiv.appendChild(headerDiv);
+
+                // Buttons container
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = 'control-buttons';
+
+                // Reboot button
+                const rebootBtn = document.createElement('button');
+                rebootBtn.className = 'control-btn btn-reboot';
+                rebootBtn.textContent = 'Reboot Device';
+                rebootBtn.onclick = () => sendControlAction(device.id, 'reboot');
+                buttonsDiv.appendChild(rebootBtn);
+
+                // Calibrate button
+                const calibrateBtn = document.createElement('button');
+                calibrateBtn.className = 'control-btn btn-calibrate';
+                calibrateBtn.textContent = 'Calibrate Sensor';
+                calibrateBtn.onclick = () => sendControlAction(device.id, 'calibrate_moisture');
+                buttonsDiv.appendChild(calibrateBtn);
+
+                deviceDiv.appendChild(buttonsDiv);
+
+                // Status message div
+                const statusDiv = document.createElement('div');
+                statusDiv.id = 'status-' + device.id;
+                statusDiv.className = 'status-message';
+                deviceDiv.appendChild(statusDiv);
+
+                container.appendChild(deviceDiv);
+            });
+        }
+
+        function showStatus(deviceId, message, isSuccess) {
+            const statusDiv = document.getElementById('status-' + deviceId);
+            if (statusDiv) {
+                statusDiv.textContent = message;
+                statusDiv.className = 'status-message ' + (isSuccess ? 'success' : 'error');
+                statusDiv.style.display = 'block';
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function sendControlAction(deviceId, action) {
+            const payload = {
+                device_id: deviceId,
+                action: action
+            };
+
+            fetch('/api/control', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showStatus(deviceId, 'Error: ' + data.error, false);
+                } else {
+                    showStatus(deviceId, 'Action sent successfully: ' + action, true);
+                }
+            })
+            .catch(error => {
+                showStatus(deviceId, 'Error: ' + error.message, false);
+            });
+        }
+
+        window.onload = function() {
+            renderDevices();
+        };
+    </script>
+</body>
+</html>

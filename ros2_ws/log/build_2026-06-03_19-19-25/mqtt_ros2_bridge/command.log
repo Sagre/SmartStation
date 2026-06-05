@@ -1,0 +1,4 @@
+Invoking command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge': /usr/bin/cmake --build /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge -- -j4 -l4
+Invoked command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge' returned '0': /usr/bin/cmake --build /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge -- -j4 -l4
+Invoking command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge': /usr/bin/cmake --install /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge
+Invoked command in '/home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge' returned '0': /usr/bin/cmake --install /home/sagre/SmartStationNew/ros2_ws/build/mqtt_ros2_bridge

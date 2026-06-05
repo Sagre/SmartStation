@@ -1,0 +1,4 @@
+source;share/mqtt_ros2_bridge/local_setup.bash
+source;share/mqtt_ros2_bridge/local_setup.dsv
+source;share/mqtt_ros2_bridge/local_setup.sh
+source;share/mqtt_ros2_bridge/local_setup.zsh
